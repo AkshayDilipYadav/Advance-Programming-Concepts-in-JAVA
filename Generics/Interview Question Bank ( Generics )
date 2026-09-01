@@ -1,0 +1,415 @@
+LEVEL 1 — Must answer instantly
+
+1. What are Generics?
+
+Answer:
+
+Generics allow Java classes, interfaces, and methods to work with parameterized types while providing compile-time type safety and reducing explicit casting.
+
+Why important: Fundamental definition.
+
+2. Why do we need Generics?
+
+Answer:
+
+For:
+
+Type safety
+Reusability
+Reduced casting
+Better API design
+
+Why important: Tests whether you understand the problem Generics solve.
+
+3. When were Generics introduced?
+
+Answer:
+
+Java 5.
+
+Why important: Common basic follow-up.
+
+4. What is T?
+
+Answer:
+
+A conventional name for a type parameter.
+
+Why important: Tests terminology.
+
+5. What are E, K, and V?
+
+Answer:
+
+E → Element
+K → Key
+V → Value
+
+They are conventions, not reserved keywords.
+
+Why important: You'll constantly encounter them in Collections.
+
+6. What is a generic class?
+
+Answer:
+
+A class that declares one or more type parameters.
+
+class Box<T> {
+    T value;
+}
+
+Why important: Core implementation concept.
+
+7. What is a generic method?
+
+Answer:
+
+A method that declares its own type parameter.
+
+static <T> T identity(T value) {
+    return value;
+}
+
+Why important: Core syntax.
+
+8. What is a wildcard?
+
+Answer:
+
+? represents an unknown type.
+
+List<?>
+
+Why important: Foundation for advanced Generics.
+
+9. What is a bounded type?
+
+Answer:
+
+A restriction on a generic type.
+
+<T extends Number>
+
+Why important: Tests constrained generic programming.
+
+10. Can Generics use primitive types?
+
+Answer:
+
+No.
+
+List<int> // ❌
+
+Use:
+
+List<Integer> // ✅
+
+Why important: Common trap.
+
+LEVEL 2 — Very likely
+11. What is ? extends Number?
+
+An upper-bounded wildcard representing an unknown subtype of Number.
+
+Why important: Core wildcard concept.
+
+12. What is ? super Integer?
+
+A lower-bounded wildcard representing an unknown type that is Integer or one of its supertypes.
+
+Why important: PECS.
+
+13. Explain PECS.
+
+Answer:
+
+Producer Extends, Consumer Super.
+
+Why important: One of the most important Generics interview rules.
+
+14. Why can't you add to List<? extends Number>?
+
+Because the exact subtype is unknown. It could be List<Integer> or List<Double>, so adding a particular Number subtype isn't safe.
+
+Why important: Tests actual understanding of extends.
+
+15. Why can you add Integer to List<? super Integer>?
+
+Because the list can only be List<Integer>, List<Number>, or List<Object>, all of which can accept Integer.
+
+Why important: Tests understanding of super.
+
+16. What is the difference between List<?> and List<Object>?
+
+List<?> means a list of unknown type.
+
+List<Object> specifically means a list parameterized with Object.
+
+Why important: Extremely common trick question.
+
+17. Is List<Integer> a subtype of List<Number>?
+
+No.
+
+Java Generics are invariant.
+
+Why important: Fundamental generic type-system concept.
+
+18. Why are Generics invariant?
+
+To prevent unsafe insertion of incompatible subtypes.
+
+Why important: Tests reasoning rather than memorization.
+
+19. How do you make a generic API accept different subclasses of Number?
+
+Use:
+
+List<? extends Number>
+
+Why important: Practical wildcard usage.
+
+20. How do you make an API consume Integers?
+
+Use:
+
+List<? super Integer>
+
+Why important: Practical PECS.
+
+LEVEL 3 — Advanced
+21. What is type erasure?
+
+Generic type information is primarily removed/erased from the runtime representation, with compiler-generated casts where necessary.
+
+Why important: Major Java Generics implementation concept.
+
+22. Why does Java use type erasure?
+
+Primarily for backward compatibility with pre-Java-5 Java code and the existing JVM model.
+
+Why important: Common advanced follow-up.
+
+23. Can you create new T[10]?
+
+No.
+
+Why: Type erasure prevents Java from knowing the concrete runtime array type.
+
+Why important: Classic restriction.
+
+24. Can you use instanceof List<String>?
+
+No.
+
+obj instanceof List<String> // ❌
+
+But:
+
+obj instanceof List<?> // ✅
+
+Why important: Tests type erasure.
+
+25. Can you overload these?
+void method(List<String> list)
+void method(List<Integer> list)
+
+No.
+
+Why: Both erase to approximately:
+
+method(List)
+
+Why important: Very common interview trap.
+
+26. Can a static variable use class-level T?
+
+No.
+
+static T value; // ❌
+
+Why important: Tests generic scope.
+
+27. Can a static method be generic?
+
+Yes.
+
+static <T> void print(T value) {}
+
+Why important: Important distinction.
+
+28. What is a raw type?
+
+Using a generic type without specifying its type parameter.
+
+List list;
+
+Why important: Legacy code and compiler warnings.
+
+29. Why are raw types discouraged?
+
+They remove compile-time type safety and can cause runtime ClassCastException.
+
+Why important: Tests practical Java knowledge.
+
+30. What is the diamond operator?
+<>
+
+It allows the compiler to infer generic type arguments.
+
+Why important: Modern Java syntax.
+
+LEVEL 4 — Strong interviewer questions
+31. Difference between <T extends Number> and <? extends Number>?
+
+<T extends Number> declares a named type parameter.
+
+<? extends Number> represents an unknown type within an upper bound.
+
+Why important: Tests deeper understanding of type parameters vs wildcards.
+
+32. What can you add to List<?>?
+
+Generally only:
+
+null
+
+Why important: Wildcard behavior.
+
+33. What can you retrieve from List<?>?
+
+Safely as:
+
+Object
+
+Why important: Tests wildcard type safety.
+
+34. What can you retrieve from List<? extends Number>?
+
+Safely as:
+
+Number
+
+Why important: Tests upper bounds.
+
+35. What can you retrieve from List<? super Integer>?
+
+Safely as:
+
+Object
+
+Why important: Tests lower-bound behavior.
+
+36. Can a generic class implement a generic interface?
+
+Yes.
+
+class Repository<T>
+        implements Store<T> {
+}
+
+Why important: Generic inheritance.
+
+37. Can an interface be generic?
+
+Yes.
+
+interface Repository<T> {
+}
+
+Why important: Collections and Spring rely heavily on generic interfaces.
+
+38. Can an abstract class be generic?
+
+Yes.
+
+abstract class Service<T> {
+}
+
+Why important: Basic language capability.
+
+39. Can an enum be generic?
+
+No.
+
+Why important: Trick question.
+
+40. Can a generic class extend another generic class?
+
+Yes.
+
+class Box<T> {
+}
+
+class StringBox extends Box<String> {
+}
+
+Why important: Tests generic inheritance.
+
+PART 41 — OUTPUT QUESTIONS
+
+These are the questions I would definitely practice before your interview.
+
+Question 1
+List<? extends Number> numbers =
+        new ArrayList<Integer>();
+
+numbers.add(10);
+
+Does it compile?
+
+Answer:
+
+❌ No.
+
+Because the exact subtype is unknown.
+
+Question 2
+List<? super Integer> numbers =
+        new ArrayList<Number>();
+
+numbers.add(10);
+Answer:
+
+✅ Yes.
+
+Question 3
+List<?> list =
+        new ArrayList<String>();
+
+list.add("Hello");
+Answer:
+
+❌ No.
+
+Question 4
+List<?> list =
+        new ArrayList<String>();
+
+list.add(null);
+Answer:
+
+✅ Yes.
+
+Question 5
+List<? extends Number> numbers =
+        new ArrayList<Integer>();
+
+Number n = numbers.get(0);
+Answer:
+
+✅ Yes.
+
+Question 6
+List<? super Integer> numbers =
+        new ArrayList<Number>();
+
+Integer n = numbers.get(0);
+Answer:
+
+❌ No.
+
+Safely retrieving gives:
+
+Object
