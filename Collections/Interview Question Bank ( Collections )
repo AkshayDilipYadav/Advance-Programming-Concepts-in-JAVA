@@ -1,0 +1,349 @@
+The Java Collections Framework (JCF) is a set of interfaces, classes, and algorithms provided by Java to store, access, and manipulate groups of objects.
+
+                    Iterable
+                       |
+                  Collection
+                       |
+        +--------------+--------------+
+        |              |              |
+       List            Set           Queue
+        |              |              |
+   +----+----+     +----+----+     +---+----+
+   |         |     |         |     |        |
+ArrayList LinkedList HashSet TreeSet PriorityQueue
+              |
+           Deque
+              |
+         ArrayDeque
+
+
+                     Map
+                     |
+          +----------+----------+
+          |                     |
+       HashMap              SortedMap
+          |                     |
+    LinkedHashMap          TreeMap
+                                |
+                           NavigableMap
+
+
+
+
+Important Points
+
+
+ArrayList
+LinkedList
+HashSet
+LinkedHashSet
+TreeSet
+HashMap
+LinkedHashMap
+TreeMap
+Queue
+Deque
+PriorityQueue
+Iterator
+Comparable
+Comparator
+Collections utility class
+Streams with collections
+Optional
+Generics
+equals()
+hashCode()
+ConcurrentHashMap
+
+
+
+
+
+
+
+
+
+Level 1 — Fundamentals
+1. What is the Java Collections Framework?
+
+Answer: A framework of interfaces, implementations, and algorithms for storing and manipulating groups of objects.
+
+Why asked: Tests whether you understand the overall ecosystem rather than individual classes.
+
+2. What is the difference between Collection and Collections?
+
+Answer:
+
+Collection → interface
+Collections → utility class
+
+Why asked: Very common terminology trap.
+
+3. Is Map a Collection?
+
+Answer: No.
+
+Map is a separate hierarchy for key-value mappings.
+
+Why asked: Tests knowledge of the hierarchy.
+
+4. Difference between List, Set and Map?
+
+Answer:
+
+List → ordered, duplicates allowed
+Set → unique elements
+Map → key-value pairs, unique keys
+
+Why asked: Fundamental understanding.
+
+5. Why do Collections use Generics?
+
+Answer: To provide compile-time type safety and reduce casting.
+
+Why asked: Connects Collections with Java Generics.
+
+Level 2 — ArrayList / LinkedList
+6. How does ArrayList work internally?
+
+Answer: It uses a resizable array. When capacity is insufficient, a larger array is allocated and elements are copied.
+
+Why asked: Tests data-structure understanding.
+
+7. Why is ArrayList get() O(1)?
+
+Answer: Because array elements can be accessed directly by index.
+
+Why asked: Tests complexity reasoning.
+
+8. Why is insertion in the middle of ArrayList O(n)?
+
+Answer: Existing elements may need to be shifted.
+
+Why asked: Tests internal mechanics.
+
+9. What is amortized O(1)?
+
+Answer: Most operations are O(1), but occasional expensive operations such as resizing make the average cost over a sequence O(1).
+
+Why asked: Very common complexity question.
+
+10. ArrayList vs LinkedList?
+
+Answer: ArrayList provides fast random access and usually better locality; LinkedList provides efficient end operations but poor random access.
+
+Why asked: Tests choosing data structures based on workload.
+
+Level 3 — HashMap / HashSet
+11. How does HashMap work internally?
+
+Answer: It hashes the key to determine a bucket, then uses key equality to locate the corresponding entry. Collision handling may use linked nodes and, under appropriate conditions, treeified buckets.
+
+Why asked: One of the most important Java interview questions.
+
+12. What is hash collision?
+
+Answer: When different keys produce the same bucket/hash location.
+
+Why asked: Tests understanding of hashing.
+
+13. Why do we need both hashCode() and equals()?
+
+Answer: hashCode() helps locate a candidate bucket, while equals() determines logical equality among candidates.
+
+Why asked: Tests HashMap/HashSet internals.
+
+14. What is the equals/hashCode contract?
+
+Answer: If two objects are equal according to equals(), they must have the same hash code.
+
+Why asked: Critical for custom objects in hash collections.
+
+15. What happens if equals() is overridden but hashCode() isn't?
+
+Answer: Equal objects can have different hash codes and therefore may be placed into different hash buckets, breaking expected hash-based collection behavior.
+
+Why asked: Extremely common practical trap.
+
+16. Can HashMap have null keys?
+
+Answer: Yes, HashMap permits one null key and multiple null values.
+
+Why asked: Tests implementation-specific knowledge.
+
+17. Can HashSet contain null?
+
+Answer: Standard HashSet permits one null element.
+
+Why asked: Common quick question.
+
+18. What happens if you insert duplicate keys into HashMap?
+map.put(1, "A");
+map.put(1, "B");
+
+Answer:
+
+1 → B
+
+The previous value is replaced.
+
+Why asked: Tests Map semantics.
+
+Level 4 — Set
+19. HashSet vs LinkedHashSet?
+HashSet → no guaranteed order
+LinkedHashSet → insertion order
+
+Why asked: Tests ordering requirements.
+
+20. HashSet vs TreeSet?
+HashSet → hashing, average O(1)
+TreeSet → sorted tree, O(log n)
+
+Why asked: Tests performance and ordering.
+
+21. How does HashSet ensure uniqueness?
+
+Answer: It uses hash-based lookup involving hashCode() and equals().
+
+Why asked: Tests whether you understand that Set uniqueness isn't magic.
+
+Level 5 — Queue / Stack
+22. What is Queue?
+
+Answer: An interface representing a collection designed for processing elements according to a queue discipline, commonly FIFO.
+
+Why asked: Basic data structure knowledge.
+
+23. Difference between poll() and remove()?
+poll()   → null if empty
+remove() → exception if empty
+
+Why asked: API knowledge.
+
+24. Difference between peek() and element()?
+peek()    → null if empty
+element() → exception if empty
+
+Why asked: Same API trap.
+
+25. What is Deque?
+
+Answer: Double-ended queue allowing insertion and removal at both ends.
+
+Why asked: Important for queues and stacks.
+
+26. Why use ArrayDeque instead of Stack?
+
+Answer: Stack is a legacy class based on Vector; ArrayDeque is generally preferred for stack behavior in modern Java.
+
+Why asked: Tests modern Java knowledge.
+
+27. What is PriorityQueue?
+
+Answer: A heap-based queue where the head is determined by priority.
+
+Why asked: Extremely useful for DSA/backend problems.
+
+Level 6 — Sorting
+28. Comparable vs Comparator?
+
+Answer:
+
+Comparable → natural ordering inside class
+Comparator → external/custom ordering
+
+Why asked: Very common.
+
+29. What does compareTo() return?
+
+Conceptually:
+
+negative → this < other
+0        → equal according to ordering
+positive → this > other
+
+Why asked: Tests sorting fundamentals.
+
+30. Can a class have multiple Comparators?
+
+Answer: Yes.
+
+For example:
+
+sort by name
+sort by salary
+sort by age
+sort by joining date
+
+Why asked: Demonstrates practical understanding.
+
+Level 7 — Iterator / Modification
+31. What is Iterator?
+
+Answer: An abstraction for traversing collection elements.
+
+Why asked: Tests traversal knowledge.
+
+32. What is ConcurrentModificationException?
+
+Answer: It can occur when a collection is structurally modified unexpectedly while being traversed through a fail-fast iterator.
+
+Why asked: Very common real-world bug.
+
+33. How can you safely remove during iteration?
+
+Use:
+
+Iterator
+
+and:
+
+iterator.remove();
+
+Why asked: Practical coding question.
+
+Level 8 — Advanced
+34. HashMap vs ConcurrentHashMap?
+
+Answer: HashMap is not designed for concurrent structural access; ConcurrentHashMap is designed for concurrent access with substantially better concurrency than synchronizing an entire map.
+
+Why asked: Important for backend engineers.
+
+35. Why doesn't ConcurrentHashMap allow null?
+
+Answer: Allowing null would create ambiguity between "mapping absent" and "mapping present with null value" in concurrent operations.
+
+Why asked: Tests deeper understanding.
+
+36. What is load factor?
+
+Answer: It determines how full a hash table can become before resizing.
+
+Why asked: HashMap internals.
+
+37. What is the default HashMap load factor?
+
+Answer:
+
+0.75
+
+Why asked: Common trivia.
+
+38. What is initial capacity?
+
+Answer: The initial bucket-table capacity concept used by the HashMap implementation before resizing.
+
+Why asked: Tests HashMap configuration.
+
+39. Why shouldn't mutable objects be used as HashMap keys?
+
+Answer: If fields involved in equals()/hashCode() change after insertion, lookup may use a different hash/bucket and fail to find the existing entry.
+
+Why asked: Excellent real-world trap.
+
+40. What is the difference between synchronized collections and concurrent collections?
+
+Answer: Synchronized wrappers generally serialize access around collection operations, while concurrent collections are specifically designed with finer-grained/non-blocking or specialized concurrency strategies depending on implementation.
+
+Why asked: Backend concurrency knowledge.
