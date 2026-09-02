@@ -1,0 +1,736 @@
+
+
+
+LAMBDA
+    ↓
+Concise representation of behavior
+    ↓
+Requires compatible functional interface
+
+Predicate<T>
+    T → boolean
+    test()
+
+Function<T,R>
+    T → R
+    apply()
+
+Consumer<T>
+    T → void
+    accept()
+
+Supplier<T>
+    () → T
+    get()
+
+Then:
+
+STREAM
+    ↓
+Data processing abstraction
+    ↓
+NOT a data structure
+
+Source
+    ↓
+Intermediate operations
+    ↓
+Terminal operation
+
+Intermediate:
+
+filter
+map
+flatMap
+distinct
+sorted
+limit
+skip
+peek
+
+Terminal:
+
+forEach
+collect
+reduce
+count
+min
+max
+findFirst
+findAny
+anyMatch
+allMatch
+noneMatch
+
+Remember:
+
+filter → select
+map → transform
+flatMap → transform + flatten
+reduce → combine
+collect → accumulate
+
+And:
+
+groupingBy
+    ↓
+many groups
+
+partitioningBy
+    ↓
+true / false
+
+
+
+
+
+
+
+
+
+
+Q1. What is a lambda expression?
+
+Answer:
+
+A lambda is a concise representation of behavior that can be assigned to a functional interface or passed as an argument.
+
+Why asked: Tests Java 8 fundamentals.
+
+Q2. Why were lambdas introduced?
+
+Answer:
+
+To support concise functional-style programming and make passing behavior easier, particularly with functional interfaces and collection/stream operations.
+
+Why asked: Tests whether you understand the motivation rather than syntax.
+
+Q3. What is a functional interface?
+
+Answer:
+
+An interface with exactly one abstract method.
+
+Why asked: Lambdas require a compatible target functional interface.
+
+Q4. Can a functional interface contain default methods?
+
+Answer:
+
+Yes.
+
+It can have exactly one abstract method, while also having any number of default and static methods.
+
+Why asked: Tests precise understanding of "one abstract method."
+
+Q5. Can a functional interface have static methods?
+
+Answer:
+
+Yes.
+
+Static methods don't count as abstract methods.
+
+Q6. What does @FunctionalInterface do?
+
+Answer:
+
+It tells the compiler that the interface is intended to have exactly one abstract method and causes a compilation error if that contract is violated.
+
+Q7. Can a lambda exist without a functional interface?
+
+Answer:
+
+A lambda needs a target functional interface type for its meaning/type to be determined.
+
+FUNCTIONAL INTERFACES
+Q8. What is Predicate?
+
+Answer:
+
+T → boolean
+
+Method:
+
+test()
+Q9. What is Function?
+T → R
+
+Method:
+
+apply()
+Q10. What is Consumer?
+T → void
+
+Method:
+
+accept()
+Q11. What is Supplier?
+() → T
+
+Method:
+
+get()
+Q12. Difference between Function and Consumer?
+
+Answer:
+
+Function returns a result; Consumer doesn't.
+
+Function → T → R
+Consumer → T → void
+Q13. Difference between Predicate and Function?
+
+Answer:
+
+Predicate always returns boolean, while Function can return another type.
+
+Q14. What is BiFunction?
+
+Answer:
+
+A functional interface that accepts two arguments and returns a result.
+
+T,U → R
+STREAM FUNDAMENTALS
+Q15. What is a Stream?
+
+Answer:
+
+A Stream is an abstraction for processing a sequence of elements through a pipeline of functional-style operations.
+
+Q16. Is Stream a data structure?
+
+Answer:
+
+No.
+
+Collections store data; Streams process data.
+
+Q17. Difference between Collection and Stream?
+
+Answer:
+
+Collection is primarily about storing/managing data; Stream is about processing data declaratively.
+
+Q18. Does creating a Stream modify the collection?
+
+Answer:
+
+No. Creating/processing a stream doesn't inherently modify the source collection, although lambdas can introduce side effects if you explicitly mutate external state.
+
+STREAM PIPELINE
+Q19. What are the three parts of a Stream pipeline?
+
+Answer:
+
+Source
+Intermediate operations
+Terminal operation
+Q20. What are intermediate operations?
+
+Answer:
+
+Operations that return another Stream and are generally lazy.
+
+Examples:
+
+filter
+map
+flatMap
+sorted
+distinct
+limit
+skip
+Q21. What are terminal operations?
+
+Answer:
+
+Operations that consume the stream and produce a result or side effect.
+
+Examples:
+
+collect
+forEach
+reduce
+count
+min
+max
+findFirst
+Q22. What is lazy evaluation?
+
+Answer:
+
+Intermediate stream operations are generally not executed until a terminal operation triggers the pipeline.
+
+Why asked: This is fundamental to understanding how Streams actually execute.
+
+Q23. Can you reuse a Stream?
+
+Answer:
+
+No.
+
+Once a terminal operation has consumed it, attempting another operation results in IllegalStateException.
+
+MAP / FILTER / REDUCE
+Q24. What is filter()?
+
+Answer:
+
+Selects elements that satisfy a predicate.
+
+Stream<T> → Stream<T>
+Q25. What is map()?
+
+Answer:
+
+Transforms each element.
+
+Stream<T> → Stream<R>
+Q26. What is flatMap()?
+
+Answer:
+
+Transforms each element into a stream and flattens the resulting streams into one stream.
+
+Q27. Difference between map and flatMap?
+
+Answer:
+
+map     → one input → one output
+flatMap → one input → multiple/zero outputs, then flatten
+Q28. What is reduce()?
+
+Answer:
+
+It combines stream elements into a single result using an accumulation operation.
+
+Q29. What is the identity in reduce()?
+
+Example:
+
+reduce(0, Integer::sum)
+
+0 is the identity value.
+
+It represents the neutral starting value for the operation.
+
+COLLECTORS
+Q30. What is collect()?
+
+Answer:
+
+A terminal operation used to accumulate stream elements into a result container or other aggregate result.
+
+Q31. collect() vs reduce()?
+
+Answer:
+
+reduce() is generally for combining elements into a single value, while collect() is designed for mutable/result-container accumulation such as Lists, Sets, Maps and grouped results.
+
+Q32. What is groupingBy()?
+
+Answer:
+
+It groups stream elements based on a classification function.
+
+Collectors.groupingBy(
+    Employee::getDepartment
+)
+Q33. groupingBy() vs partitioningBy()?
+
+Answer:
+
+groupingBy
+→ potentially many groups
+
+partitioningBy
+→ exactly two groups: true/false
+Q34. How do you count occurrences using Streams?
+Map<Integer, Long> frequency =
+        numbers.stream()
+               .collect(
+                   Collectors.groupingBy(
+                       Function.identity(),
+                       Collectors.counting()
+                   )
+               );
+SHORT-CIRCUITING
+Q35. What are short-circuiting operations?
+
+Answer:
+
+Operations that may stop processing before consuming the entire stream.
+
+Examples:
+
+findFirst
+findAny
+anyMatch
+allMatch
+noneMatch
+limit
+
+Why asked: Tests whether you understand stream execution efficiency.
+
+Q36. findFirst vs findAny?
+
+Answer:
+
+findFirst() respects encounter order when one exists; findAny() can return any matching element and may be more flexible in parallel execution.
+
+SORTING
+Q37. How do you sort a Stream?
+numbers.stream()
+       .sorted()
+       .toList();
+
+For custom sorting:
+
+products.stream()
+        .sorted(
+            Comparator.comparing(
+                Product::getName
+            )
+        )
+        .toList();
+Q38. How do you sort descending?
+.sorted(
+    Comparator
+        .comparingDouble(Product::getPrice)
+        .reversed()
+)
+Q39. How do you sort by multiple fields?
+.sorted(
+    Comparator
+        .comparingDouble(Product::getPrice)
+        .thenComparing(Product::getName)
+)
+OPTIONAL
+Q40. Why does findFirst() return Optional?
+
+Answer:
+
+Because there may be no matching element, and Optional explicitly represents the possibility of absence.
+
+Q41. Difference between orElse() and orElseGet()?
+
+Answer:
+
+orElse() evaluates its fallback expression eagerly.
+
+orElseGet() evaluates the Supplier only if the Optional is empty.
+
+Q42. Is Optional a replacement for null everywhere?
+
+Answer:
+
+No.
+
+It is primarily useful for representing potentially absent return values. It shouldn't automatically be used for every field, parameter, or variable.
+
+LAMBDAS
+Q43. Can lambda access local variables?
+
+Answer:
+
+Yes, if those local variables are final or effectively final.
+
+Q44. What is effectively final?
+
+Answer:
+
+A local variable that isn't declared final but is never reassigned after initialization.
+
+Q45. Does lambda have its own this?
+
+Answer:
+
+No. this inside a lambda refers to the enclosing instance.
+
+Q46. Lambda vs anonymous inner class?
+
+Answer:
+
+Lambda provides concise behavior for a functional interface. Anonymous classes are more general and can implement interfaces with multiple abstract methods or extend classes.
+
+METHOD REFERENCES
+Q47. What is a method reference?
+
+Answer:
+
+A concise syntax for referring to an existing method where it can serve as the implementation of a compatible functional interface.
+
+Example:
+
+System.out::println
+Q48. Types of method references?
+
+Answer:
+
+1. Static method
+2. Instance method of a particular object
+3. Instance method of an arbitrary object of a type
+4. Constructor reference
+PARALLEL STREAMS
+Q49. What is parallelStream()?
+
+Answer:
+
+It creates a parallel stream whose operations may be processed concurrently across multiple threads.
+
+Q50. Is parallelStream always faster?
+
+Answer:
+
+No.
+
+Parallelism has overhead and is workload-dependent.
+
+Q51. When should you consider parallel streams?
+
+Answer:
+
+For sufficiently large, CPU-bound, independent workloads where parallelization overhead is justified.
+
+Q52. Why can parallel streams be dangerous with shared mutable state?
+
+Example:
+
+List<Integer> result =
+        new ArrayList<>();
+
+numbers.parallelStream()
+       .forEach(result::add);
+
+The shared mutable ArrayList is not designed for this concurrent modification pattern.
+
+Prefer:
+
+List<Integer> result =
+        numbers.parallelStream()
+               .filter(...)
+               .toList();
+
+Why asked: Tests concurrency understanding.
+
+ADVANCED QUESTIONS
+Q53. What is stream laziness?
+
+Answer:
+
+Intermediate operations don't generally execute immediately; they form a pipeline that is evaluated when a terminal operation is invoked.
+
+Q54. What is stream fusion?
+
+Conceptually, multiple operations can be processed as one pipeline rather than materializing an intermediate collection after each operation.
+
+For example:
+
+stream.filter(...)
+      .map(...)
+      .findFirst();
+
+doesn't require creating a separate collection after filter().
+
+Q55. What are stateful intermediate operations?
+
+Examples:
+
+sorted()
+distinct()
+
+They may need to retain information about multiple elements.
+
+Q56. What are stateless intermediate operations?
+
+Examples:
+
+filter()
+map()
+peek()
+
+Each element can generally be processed independently.
+
+Q57. Can a Stream be infinite?
+
+Yes.
+
+Example:
+
+Stream.iterate(
+        0,
+        n -> n + 1
+)
+
+You generally need a short-circuiting operation such as:
+
+.limit(10)
+
+to finish.
+
+Q58. What is peek()?
+
+peek() is an intermediate operation primarily intended for observing elements as they flow through a pipeline, commonly for debugging.
+
+Example:
+
+numbers.stream()
+       .peek(System.out::println)
+       .filter(...)
+       .toList();
+
+Don't use peek() as the primary mechanism for business side effects.
+
+Q59. Can Streams process null values?
+
+Yes, a stream can contain null elements if its source contains them.
+
+But many operations can throw NullPointerException if the lambda assumes a non-null value.
+
+You can filter them:
+
+stream.filter(Objects::nonNull)
+Q60. Can you modify a collection while streaming it?
+
+You should not structurally modify the source collection during traversal.
+
+For example, modifying an ArrayList while its stream is processing it can cause unpredictable behavior or ConcurrentModificationException.
+
+THE MOST IMPORTANT CODING QUESTIONS
+
+Before your interview, make sure you can solve these without looking up syntax.
+
+Problem 1
+
+Find all even numbers:
+
+numbers.stream()
+       .filter(n -> n % 2 == 0)
+       .toList();
+Problem 2
+
+Square all numbers:
+
+numbers.stream()
+       .map(n -> n * n)
+       .toList();
+Problem 3
+
+Find sum:
+
+numbers.stream()
+       .reduce(0, Integer::sum);
+Problem 4
+
+Find maximum:
+
+numbers.stream()
+       .max(Integer::compareTo);
+Problem 5
+
+Find second highest:
+
+numbers.stream()
+       .distinct()
+       .sorted(Comparator.reverseOrder())
+       .skip(1)
+       .findFirst();
+Problem 6
+
+Remove duplicates:
+
+numbers.stream()
+       .distinct()
+       .toList();
+Problem 7
+
+Count frequencies:
+
+numbers.stream()
+       .collect(
+           Collectors.groupingBy(
+               Function.identity(),
+               Collectors.counting()
+           )
+       );
+Problem 8
+
+Find duplicate values:
+
+Set<Integer> seen =
+        new HashSet<>();
+
+Set<Integer> duplicates =
+        numbers.stream()
+               .filter(n -> !seen.add(n))
+               .collect(Collectors.toSet());
+Problem 9
+
+Group employees by department:
+
+employees.stream()
+         .collect(
+             Collectors.groupingBy(
+                 Employee::getDepartment
+             )
+         );
+Problem 10
+
+Count employees by department:
+
+employees.stream()
+         .collect(
+             Collectors.groupingBy(
+                 Employee::getDepartment,
+                 Collectors.counting()
+             )
+         );
+Problem 11
+
+Find highest-paid employee:
+
+employees.stream()
+         .max(
+             Comparator.comparingDouble(
+                 Employee::getSalary
+             )
+         );
+Problem 12
+
+Get names of employees earning > ₹100,000:
+
+employees.stream()
+         .filter(e -> e.getSalary() > 100000)
+         .map(Employee::getName)
+         .toList();
+Problem 13
+
+Join names:
+
+String result =
+        employees.stream()
+                 .map(Employee::getName)
+                 .collect(
+                     Collectors.joining(", ")
+                 );
+Problem 14
+
+Partition employees by salary:
+
+Map<Boolean, List<Employee>> result =
+        employees.stream()
+                 .collect(
+                     Collectors.partitioningBy(
+                         e -> e.getSalary() > 100000
+                     )
+                 );
+Problem 15
+
+Flatten nested lists:
+
+List<Integer> result =
+        nestedLists.stream()
+                   .flatMap(List::stream)
+                   .toList();
