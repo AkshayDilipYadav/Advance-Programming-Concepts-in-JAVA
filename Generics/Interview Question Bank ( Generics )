@@ -1,3 +1,35 @@
+# Java Generics Interview Exercise
+
+This project demonstrates the important concepts of Java Generics.
+
+## Concepts Covered
+
+1. Generic Classes
+2. Generic Interfaces
+3. Generic Methods
+4. Multiple Type Parameters
+5. Bounded Type Parameters
+6. Unbounded Wildcards
+7. Upper-Bounded Wildcards
+8. Lower-Bounded Wildcards
+9. PECS
+10. Generic Inheritance
+11. Collections with Generics
+12. Nested Generics
+13. Optional<T>
+14. Map<K,V>
+15. Diamond Operator
+16. Autoboxing
+17. Compile-Time Type Safety
+18. Generic DTOs
+19. Generic Repository Pattern
+
+---
+
+
+
+
+
 LEVEL 1 — Must answer instantly
 
 1. What are Generics?
