@@ -23,10 +23,19 @@ This project demonstrates the important concepts of Java Generics.
 17. Compile-Time Type Safety
 18. Generic DTOs
 19. Generic Repository Pattern
+20. Invariance
+21. Type Erasure
 
 ---
 
 
+Generics are a Java language feature that allows classes, interfaces, and methods to work with parameterized types, 
+providing compile-time type safety, reducing explicit type casting, and improving code reusability.
+
+why generics 
+1. Type Safety
+2. No unnecessary casting
+3.Reusability
 
 
 
