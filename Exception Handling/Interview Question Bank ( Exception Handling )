@@ -1,0 +1,642 @@
+
+
+★★★★★  Checked vs Unchecked
+★★★★★  Exception Hierarchy
+★★★★★  try/catch/finally
+★★★★★  throw vs throws
+★★★★★  Exception Propagation
+★★★★★  Custom Exceptions
+★★★★★  Try-with-resources
+★★★★★  Exception handling in Spring Boot
+★★★★★  Overriding + Exceptions
+
+★★★★☆  Multi-catch
+★★★★☆  Exception Chaining
+★★★★☆  Suppressed Exceptions
+★★★★☆  finally traps
+
+★★★☆☆  Throwable
+★★★☆☆  Error subclasses
+★★★☆☆  Static initialization exceptions
+★★★☆☆  Advanced JVM exception behavior
+
+
+
+
+
+
+Tier 1 — Must Know
+Q1. What is an exception?
+
+Answer:
+An exception is an object representing an abnormal condition during program execution that can disrupt normal program flow.
+
+Why interviewer asks:
+Tests whether you understand the foundation.
+
+Q2. What is exception handling?
+
+Answer:
+Exception handling is Java's mechanism for detecting, handling, propagating, and recovering from exceptional conditions using constructs such as try, catch, finally, throw, and throws.
+
+Why:
+Basic Java competency.
+
+Q3. What is the exception hierarchy?
+
+Answer:
+
+Throwable
+├── Error
+└── Exception
+    └── RuntimeException
+
+Why:
+Tests understanding of checked/unchecked exceptions.
+
+Q4. Error vs Exception?
+
+Answer:
+Errors generally represent serious JVM/system-level problems that applications usually don't recover from; exceptions represent conditions application code may handle or propagate.
+
+Why:
+Very frequently asked.
+
+Q5. Checked vs unchecked exceptions?
+
+Answer:
+Checked exceptions are checked by the compiler and must be caught or declared. Unchecked exceptions extend RuntimeException and don't have that requirement.
+
+Why:
+Fundamental Java knowledge.
+
+Q6. What is try?
+
+Answer:
+A block containing code that may throw an exception.
+
+Why:
+Basic syntax.
+
+Q7. What is catch?
+
+Answer:
+A block used to handle a matching exception thrown from the associated try block.
+
+Why:
+Tests control flow.
+
+Q8. What is finally?
+
+Answer:
+A block normally executed after try/catch, commonly used for cleanup.
+
+Why:
+Very common interview question.
+
+Q9. What is throw?
+
+Answer:
+throw explicitly throws an exception object.
+
+throw new IllegalArgumentException("Invalid");
+
+Why:
+Tests manual exception creation.
+
+Q10. What is throws?
+
+Answer:
+throws declares exceptions that a method may propagate to its caller.
+
+Why:
+Tests exception propagation.
+
+Q11. throw vs throws?
+
+Answer:
+
+throw  → actually throws an exception
+throws → declares possible exceptions
+
+Why:
+Classic interview question.
+
+Q12. Can we have try without catch?
+
+Answer:
+Yes, if it has finally.
+
+try {
+}
+finally {
+}
+
+Why:
+Tests syntax rules.
+
+Q13. Can we have catch without try?
+
+Answer:
+No.
+
+Why:
+Basic syntax rule.
+
+Q14. Can finally execute if exception occurs?
+
+Answer:
+Normally yes, provided execution isn't forcibly terminated.
+
+Why:
+Tests actual execution flow.
+
+Q15. Can finally be skipped?
+
+Answer:
+Yes, for example if System.exit() terminates the JVM.
+
+Why:
+Tests whether you understand the word "always."
+
+⭐⭐⭐⭐ Tier 2 — Frequently Asked
+Q16. What is exception propagation?
+
+Answer:
+If a method doesn't handle an exception, it propagates up the call stack to its caller until a matching handler is found or the thread terminates.
+
+Why:
+Essential for understanding throws.
+
+Q17. What happens if no catch matches?
+
+Answer:
+The exception propagates to the caller. If it remains uncaught, the thread terminates and the JVM reports the uncaught exception.
+
+Why:
+Tests runtime behavior.
+
+Q18. Why must specific catch blocks come before general catch blocks?
+
+Answer:
+Because a general parent type would catch the specific exception first, making later specific catches unreachable.
+
+Why:
+Common coding trap.
+
+Q19. What is multi-catch?
+
+Answer:
+
+catch (IOException | SQLException e)
+
+It allows multiple unrelated exception types to be handled by one catch block.
+
+Why:
+Tests modern Java knowledge.
+
+Q20. Can multi-catch contain parent and child exceptions?
+
+Answer:
+No.
+
+IOException | Exception
+
+is invalid because IOException is already covered by Exception.
+
+Why:
+Tests hierarchy knowledge.
+
+Q21. What is a custom exception?
+
+Answer:
+An application-specific exception class created to represent a particular technical or business failure.
+
+Why:
+Extremely relevant to backend development.
+
+Q22. How do you create a custom unchecked exception?
+
+Answer:
+
+class UserNotFoundException
+        extends RuntimeException {
+
+    public UserNotFoundException(String message) {
+        super(message);
+    }
+}
+
+Why:
+Common backend coding question.
+
+Q23. What is try-with-resources?
+
+Answer:
+A Java construct that automatically closes resources implementing AutoCloseable.
+
+try (BufferedReader reader = ...) {
+}
+
+Why:
+Very important for modern Java.
+
+Q24. What is AutoCloseable?
+
+Answer:
+An interface whose close() method allows objects to participate in try-with-resources.
+
+Why:
+Tests resource management.
+
+Q25. In what order are multiple try-with-resources resources closed?
+
+Answer:
+Reverse declaration order.
+
+Why:
+Classic interview trap.
+
+Q26. What are suppressed exceptions?
+
+Answer:
+Exceptions that occur during resource closing while another exception is already being propagated can be attached as suppressed exceptions.
+
+Why:
+Advanced try-with-resources knowledge.
+
+Q27. What is exception chaining?
+
+Answer:
+Wrapping one exception inside another while preserving the original exception as the cause.
+
+throw new RuntimeException("Operation failed", e);
+
+Why:
+Very useful in layered backend architecture.
+
+Q28. What is getCause()?
+
+Answer:
+Returns the underlying cause of an exception.
+
+Why:
+Tests exception chaining.
+
+Q29. What is getMessage()?
+
+Answer:
+Returns the exception's detail message.
+
+Why:
+Basic debugging knowledge.
+
+Q30. What is printStackTrace()?
+
+Answer:
+Prints the exception and stack trace showing where the exception propagated through the program.
+
+Why:
+Basic debugging.
+
+⭐⭐⭐⭐ Tier 3 — OOP + Exception Handling
+Q31. Can overridden methods throw exceptions?
+
+Answer:
+Yes, but a child method cannot throw a broader checked exception than the parent method.
+
+Why:
+Tests OOP + exception interaction.
+
+Q32. Can an overriding method throw a narrower checked exception?
+
+Answer:
+Yes.
+
+Parent:
+
+void test() throws IOException
+
+Child:
+
+void test() throws FileNotFoundException
+
+is valid.
+
+Why:
+Classic interview question.
+
+Q33. Can child method throw unchecked exceptions?
+
+Answer:
+Yes. Unchecked exceptions aren't subject to the checked-exception overriding restriction.
+
+Why:
+Tests RuntimeException behavior.
+
+Q34. Can constructors throw exceptions?
+
+Answer:
+Yes.
+
+User() throws IOException {
+}
+
+Why:
+Tests understanding of constructors.
+
+Q35. Can static methods throw exceptions?
+
+Answer:
+Yes.
+
+Why:
+Tests whether you incorrectly associate exception declarations only with instance methods.
+
+⭐⭐⭐⭐⭐ Tier 4 — Output/Trick Questions
+
+These are where interviews often become difficult.
+
+Q36. What is the output?
+try {
+    System.out.println("A");
+}
+finally {
+    System.out.println("B");
+}
+
+Answer:
+
+A
+B
+Q37.
+try {
+    System.out.println("A");
+    int x = 10 / 0;
+}
+catch (ArithmeticException e) {
+    System.out.println("B");
+}
+finally {
+    System.out.println("C");
+}
+
+Answer:
+
+A
+B
+C
+Q38.
+try {
+    throw new RuntimeException();
+}
+catch (RuntimeException e) {
+    System.out.println("Catch");
+}
+finally {
+    System.out.println("Finally");
+}
+
+Answer:
+
+Catch
+Finally
+Q39.
+try {
+    return 10;
+}
+finally {
+    return 20;
+}
+
+Answer:
+
+20
+
+And this is why returning from finally is dangerous.
+
+Q40.
+try {
+    return 10;
+}
+finally {
+    System.out.println("Finally");
+}
+
+Answer:
+
+Finally
+
+Return value:
+
+10
+Q41.
+try {
+    throw new Exception("A");
+}
+finally {
+    throw new Exception("B");
+}
+
+Which exception propagates?
+
+Answer:
+
+B
+
+The exception from finally becomes the primary propagated exception.
+
+Q42.
+try {
+    System.out.println("Try");
+}
+catch (Exception e) {
+    System.out.println("Catch");
+}
+finally {
+    System.out.println("Finally");
+}
+
+Answer:
+
+Try
+Finally
+⭐⭐⭐⭐⭐ Tier 5 — Backend Interview Questions
+Q43. How would you handle exceptions in a Spring Boot REST API?
+
+Strong answer:
+
+I would define meaningful application-specific exceptions, throw them from the appropriate service layer, and use centralized exception handling with @RestControllerAdvice and @ExceptionHandler to translate exceptions into consistent HTTP responses.
+
+Why:
+This tests whether you can apply Java knowledge to production backend architecture.
+
+Q44. Why use custom exceptions in backend applications?
+
+Answer:
+
+To represent meaningful domain/business failures and allow centralized handling.
+
+Examples:
+
+UserNotFoundException
+InsufficientBalanceException
+InsufficientStockException
+DuplicateOrderException
+
+Why:
+Tests production-level design.
+
+Q45. Should every exception be caught?
+
+Answer:
+
+No.
+
+Catch an exception when you can meaningfully handle, recover from, translate, or add useful context to it. Otherwise, allow it to propagate to an appropriate boundary.
+
+Why:
+Tests engineering judgment.
+
+Q46. Should we catch Exception?
+
+Answer:
+
+Not indiscriminately.
+
+Prefer specific exception types when possible. Broad catches may hide programming errors and make debugging difficult.
+
+Why:
+Tests production coding practices.
+
+Q47. Should we use exceptions for validation?
+
+Depends.
+
+For expected invalid input, validation mechanisms are often preferable. For violations discovered during business logic, meaningful exceptions can be appropriate.
+
+Why:
+Tests architectural judgment rather than syntax.
+
+Q48. Why shouldn't we swallow exceptions?
+
+Bad:
+
+catch (Exception e) {
+}
+
+Because:
+
+error information is lost
+debugging becomes difficult
+failures may silently continue
+system behavior becomes unpredictable
+
+Why:
+Very common production-quality question.
+
+Q49. Why preserve the original exception cause?
+
+Instead of:
+
+throw new DatabaseException("Database failed");
+
+use:
+
+throw new DatabaseException(
+    "Database failed", e
+);
+
+This preserves the original root cause and stack information.
+
+Why:
+Tests real-world debugging ability.
+
+Q50. What is the best way to clean up database/file resources?
+
+Use:
+
+try-with-resources
+
+when the resource implements AutoCloseable.
+
+Why:
+Tests resource safety.
+
+⭐⭐⭐ Advanced Questions
+
+These aren't necessarily asked in every interview, but knowing them gives you an edge.
+
+Q51. Can we catch Throwable?
+
+Technically yes:
+
+catch (Throwable t)
+
+But generally you should not casually do this because it includes:
+
+Error
+
+as well as exceptions.
+
+Q52. Can we catch Error?
+
+Technically yes.
+
+catch (OutOfMemoryError e)
+
+But catching serious Errors for ordinary application recovery is generally inappropriate.
+
+Q53. Is NullPointerException checked?
+
+No.
+
+It extends:
+
+RuntimeException
+Q54. Is IOException checked?
+
+Yes.
+
+It extends:
+
+Exception
+
+but not:
+
+RuntimeException
+Q55. Is SQLException checked?
+
+Yes.
+
+Q56. Is IllegalArgumentException checked?
+
+No.
+
+It extends:
+
+RuntimeException
+Q57. What happens to local variables when an exception occurs?
+
+Normal sequential execution stops at the point where the exception is thrown. Control transfers to the matching exception handler, potentially unwinding stack frames along the way.
+
+Q58. Does an exception automatically restart the try block?
+
+No.
+
+Once the exception occurs, execution does not return to the exact statement and continue normally.
+
+Control moves to the matching handler.
+
+Q59. Can a catch block throw another exception?
+
+Yes.
+
+catch (IOException e) {
+    throw new RuntimeException("Failed", e);
+}
+Q60. Can finally throw an exception?
+
+Yes.
+
+But it should generally be avoided because it can obscure another exception.
