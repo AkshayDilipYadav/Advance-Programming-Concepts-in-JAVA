@@ -1,0 +1,1169 @@
+1. What is OOP in Java?
+
+OOP = Object-Oriented Programming.
+
+It is a programming paradigm where we organize software around objects, rather than primarily around functions.
+
+An object contains:
+
+State → data/properties
+Behavior → methods/functions
+
+
+
+2. Why do we need OOP?
+
+
+
+This improves:
+
+organization
+maintainability
+reusability
+scalability
+security
+extensibility
+
+
+3. The 4 Pillars of OOP
+
+This is extremely important for interviews.
+
+Remember:
+
+EIPA
+
+Encapsulation
+Inhheritance
+Polymorphism
+Abstraction
+
+4. Encapsulation
+
+Encapsulation means:
+
+Bundling data and methods together while restricting direct access to the internal state.
+
+
+for example
+
+
+class BankAccount {
+
+    private double balance;
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        }
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+}
+
+You cannot do:
+
+BankAccount account = new BankAccount();
+
+account.balance = -100000;
+
+
+Because the class controls how its data is modified.
+
+This is data hiding.
+
+
+5. Inheritance
+
+Inheritance allows one class to acquire properties and behavior from another class.
+
+class Animal {
+
+    void eat() {
+        System.out.println("Eating");
+    }
+}
+class Dog extends Animal {
+
+    void bark() {
+        System.out.println("Barking");
+    }
+}
+
+Now:
+
+Dog dog = new Dog();
+
+dog.eat();
+dog.bark();
+
+Dog inherits eat() from Animal.
+
+
+
+
+
+
+
+7. Polymorphism
+
+Polymorphism means:
+
+One interface/reference, multiple forms of behavior.
+
+There are two major forms in Java:
+
+Compile-time polymorphism
+
+Method overloading
+
+class Calculator {
+
+    int add(int a, int b) {
+        return a + b;
+    }
+
+    int add(int a, int b, int c) {
+        return a + b + c;
+    }
+}
+
+Same method name:
+
+add()
+
+Different parameters.
+
+
+
+
+Runtime polymorphism
+
+Method overriding
+
+class Animal {
+
+    void sound() {
+        System.out.println("Animal sound");
+    }
+}
+class Dog extends Animal {
+
+    @Override
+    void sound() {
+        System.out.println("Bark");
+    }
+}
+
+Now:
+
+Animal animal = new Dog();
+
+animal.sound();
+
+Output:
+
+Bark
+
+The method executed is determined at runtime.
+
+This is one of the most important Java interview concepts.
+
+
+
+8. Abstraction
+
+Abstraction means:
+
+Hiding implementation details and exposing only the necessary functionality.
+
+Real-world example:
+
+When you use:
+
+car.start();
+
+You don't need to know exactly how the engine, fuel injection and ignition system work.
+
+Java provides abstraction mainly through:
+
+abstract classes
+interfaces
+
+Example:
+
+abstract class Vehicle {
+
+    abstract void start();
+}
+class Car extends Vehicle {
+
+    @Override
+    void start() {
+        System.out.println("Car starts");
+    }
+}
+
+The user knows:
+
+start()
+
+but doesn't necessarily need to know its implementation.
+
+
+
+10. What is a Class?
+
+A class is a blueprint/template for creating objects.
+
+class Student {
+
+    String name;
+    int age;
+
+    void study() {
+        System.out.println("Studying");
+    }
+}
+
+The class itself describes what a student object should contain.
+
+
+
+11. What is an Object?
+
+An object is an instance of a class.
+
+Student student = new Student();
+
+Here:
+
+Student → class
+student → reference variable
+new Student() → object
+
+This distinction is frequently tested.
+
+Technically:
+
+Student student;
+
+doesn't create an object.
+
+It creates a reference variable.
+
+Object creation happens with:
+
+new Student();
+
+
+
+
+
+12. What is a Constructor?
+
+A constructor is a special member of a class used to initialize objects.
+
+Example:
+
+class Student {
+
+    String name;
+    int age;
+
+    Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+Creating an object:
+
+Student student = new Student("Akshay", 31);
+
+The constructor runs when the object is created.
+
+
+
+----- IMPORTANT 13. Constructor rules — MEMORIZE THESE
+
+
+A constructor:
+
+1. Has the same name as the class
+class Student {
+
+    Student() {
+    }
+}
+2. Has no return type
+
+Correct:
+
+Student() {
+}
+
+Incorrect:
+
+void Student() {
+}
+
+The second one is a method, not a constructor.
+
+3. Is automatically invoked during object creation
+Student s = new Student();
+4. Can be overloaded
+Student() {
+}
+
+Student(String name) {
+}
+
+Student(String name, int age) {
+}
+5. Cannot be overridden
+
+Constructors are not inherited, so they cannot be overridden.
+
+6. Can have access modifiers
+public Student() {
+}
+
+private Student() {
+}
+
+protected Student() {
+}
+
+
+
+14. Types of Constructors
+
+No-argument constructor
+
+class Student {
+
+    Student() {
+        System.out.println("Constructor called");
+    }
+}
+
+Parameterized constructor
+
+class Student {
+
+    String name;
+
+    Student(String name) {
+        this.name = name;
+    }
+}
+
+Default constructor
+
+This is a very important distinction.
+
+If you don't declare any constructor, Java provides a default constructor automatically.
+
+class Student {
+
+    String name;
+}
+
+Conceptually Java provides:
+
+Student() {
+    super();
+}
+
+But if you write:
+
+Student(String name) {
+    this.name = name;
+}
+
+Java does not automatically provide:
+
+Student()
+
+Therefore:
+
+Student s = new Student();
+
+will fail.
+
+
+
+---- CONCEPT : SUPER
+
+
+18. super
+
+super refers to the immediate parent class.
+
+Example:
+
+class Animal {
+
+    String name = "Animal";
+}
+class Dog extends Animal {
+
+    String name = "Dog";
+
+    void printNames() {
+        System.out.println(name);
+        System.out.println(super.name);
+    }
+}
+
+Output:
+
+Dog
+Animal
+19. super() in constructors
+
+Very important.
+
+class Animal {
+
+    Animal() {
+        System.out.println("Animal constructor");
+    }
+}
+class Dog extends Animal {
+
+    Dog() {
+        System.out.println("Dog constructor");
+    }
+}
+
+When:
+
+Dog dog = new Dog();
+
+Output:
+
+Animal constructor
+Dog constructor
+
+Why?
+
+Because the child constructor implicitly calls:
+
+super();
+
+unless another constructor invocation is explicitly provided.
+
+20. Constructor execution order
+
+Consider:
+
+class A {
+
+    A() {
+        System.out.println("A");
+    }
+}
+
+class B extends A {
+
+    B() {
+        System.out.println("B");
+    }
+}
+
+class C extends B {
+
+    C() {
+        System.out.println("C");
+    }
+}
+C c = new C();
+
+Output:
+
+A
+B
+C
+
+Parent constructor executes before child constructor.
+
+
+
+
+-- CONCEPT : SUPER
+
+
+
+
+
+-- ACCESS MODIFIER
+
+This is another very high-priority interview topic.
+
+Java has four access levels:
+
+| Access Modifier | Same Class | Same Package | Subclass (Other Package) | Other Package |
+|-----------------|:----------:|:------------:|:------------------------:|:-------------:|
+| `private`       | ✅         | ❌           | ❌                       | ❌            |
+| `default`       | ✅         | ✅           | ❌                       | ❌            |
+| `protected`     | ✅         | ✅           | ✅                       | ❌            |
+| `public`        | ✅         | ✅           | ✅                       | ✅            |
+
+
+private - Accessible only inside the same class.
+
+default - It can be accessed by classes in the same package, but not from unrelated classes in another package.
+
+protected - protected allows access: Within the same package, Through inheritance in another package
+
+public - Accessible from anywhere where the class itself is accessible.
+
+
+
+
+
+27. Method Overloading
+
+Same method name but different parameter list.
+
+class Calculator {
+
+    int add(int a, int b) {
+        return a + b;
+    }
+
+    int add(int a, int b, int c) {
+        return a + b + c;
+    }
+
+    double add(double a, double b) {
+        return a + b;
+    }
+}
+
+Overloading can differ by:
+
+number of parameters
+parameter types
+order of parameter types
+
+
+
+28. Method Overriding
+
+Child class provides a new implementation of a parent method.
+
+class Animal {
+
+    void sound() {
+        System.out.println("Animal sound");
+    }
+}
+class Dog extends Animal {
+
+    @Override
+    void sound() {
+        System.out.println("Bark");
+    }
+}
+
+Important:
+
+Animal a = new Dog();
+
+a.sound();
+
+Output:
+
+Bark
+
+This is runtime polymorphism.
+
+
+
+32. Abstract Class
+
+An abstract class cannot be instantiated directly.
+
+abstract class Animal {
+
+    abstract void sound();
+
+    void eat() {
+        System.out.println("Eating");
+    }
+}
+
+You cannot:
+
+Animal a = new Animal(); // ERROR
+
+But:
+
+class Dog extends Animal {
+
+    @Override
+    void sound() {
+        System.out.println("Bark");
+    }
+}
+
+Then:
+
+Animal a = new Dog();
+
+is valid.
+
+An abstract class can have:
+
+constructors
+instance variables
+concrete methods
+abstract methods
+static members
+
+
+
+
+33. Interface
+
+An interface defines a contract.
+
+interface Payment {
+
+    void pay();
+}
+
+Implementation:
+
+class CreditCardPayment implements Payment {
+
+    @Override
+    public void pay() {
+        System.out.println("Paid using credit card");
+    }
+}
+
+Interface references are extremely important for abstraction and polymorphism:
+
+Payment payment = new CreditCardPayment();
+
+payment.pay();
+
+
+
+
+
+34. Abstract Class vs Interface
+
+Interview favorite.
+
+Abstract Class	Interface
+extends	implements
+Can have instance variables	Fields are implicitly public static final
+Can have constructors	Cannot have constructors
+Can have concrete methods	Can have abstract, default, static, and private methods
+A class can extend only one class	A class can implement multiple interfaces
+
+Modern Java interfaces are more powerful than the simplistic "only abstract methods" definition.
+
+
+
+
+Q1. What is OOP?
+
+Answer:
+
+OOP is a programming paradigm that organizes software around objects containing state and behavior. Java uses OOP concepts such as encapsulation, inheritance, polymorphism and abstraction to improve maintainability, reusability and scalability.
+
+Why asked?
+
+Tests whether you understand the fundamental programming model of Java.
+
+Q2. What are the four pillars of OOP?
+
+Answer:
+
+Encapsulation
+Inheritance
+Polymorphism
+Abstraction
+
+Why asked?
+
+This is one of the most fundamental Java interview questions.
+
+Q3. What is encapsulation?
+
+Answer:
+
+Encapsulation is bundling data and methods together and controlling access to the internal state of an object, commonly using access modifiers such as private.
+
+Why asked?
+
+Tests understanding of data protection and class design.
+
+Q4. What is abstraction?
+
+Answer:
+
+Abstraction hides implementation details and exposes only the essential functionality. In Java it is primarily achieved using abstract classes and interfaces.
+
+Why asked?
+
+Tests whether you understand how complex systems expose simple APIs.
+
+Q5. Encapsulation vs abstraction?
+
+Answer:
+
+Encapsulation focuses on protecting and controlling access to data, whereas abstraction focuses on hiding implementation complexity and exposing essential behavior.
+
+Why asked?
+
+Extremely common conceptual question.
+
+Q6. What is inheritance?
+
+Answer:
+
+Inheritance allows a child class to acquire accessible fields and methods from a parent class using extends.
+
+class Dog extends Animal {
+}
+
+Why asked?
+
+Tests understanding of reuse and IS-A relationships.
+
+Q7. Does Java support multiple inheritance?
+
+Answer:
+
+Java does not support multiple inheritance through classes.
+
+class C extends A, B // invalid
+
+However, Java supports implementing multiple interfaces.
+
+class C implements A, B {
+}
+
+Why asked?
+
+Very common Java-specific question.
+
+Q8. What is polymorphism?
+
+Answer:
+
+Polymorphism means one interface/reference can represent different implementations. Java supports compile-time polymorphism through method overloading and runtime polymorphism through method overriding.
+
+Why asked?
+
+Fundamental OOP concept.
+
+Q9. Overloading vs overriding?
+
+Answer:
+
+Overloading:
+
+same method name
+different parameter list
+generally resolved at compile time
+
+Overriding:
+
+child provides implementation of inherited method
+same signature
+resolved dynamically at runtime
+
+Why asked?
+
+One of the most frequently asked Java questions.
+
+Q10. Can return type alone distinguish overloaded methods?
+
+Answer:
+
+No.
+
+int test(int x)
+double test(int x)
+
+is invalid.
+
+Why asked?
+
+Tests whether you actually understand method signatures.
+
+Q11. What is a constructor?
+
+Answer:
+
+A constructor is a special class member used to initialize an object. It has the same name as the class and has no return type.
+
+Why asked?
+
+Constructors are fundamental to object creation.
+
+Q12. Constructor vs method?
+
+Answer:
+
+Constructor	Method
+Initializes object	Performs behavior
+Same name as class	Can have any valid name
+No return type	Has return type or void
+Invoked during object creation	Called explicitly/invoked
+Cannot be overridden	Can be overridden
+Q13. Can constructors be overloaded?
+
+Answer:
+
+Yes.
+
+Student() {}
+
+Student(String name) {}
+
+Student(String name, int age) {}
+
+Why asked?
+
+Tests constructor understanding.
+
+Q14. Can constructors be overridden?
+
+Answer:
+
+No.
+
+Constructors aren't inherited, so they cannot be overridden.
+
+Why asked?
+
+Classic Java trick question.
+
+Q15. What happens if you don't define a constructor?
+
+Answer:
+
+If the class declares no constructor, Java provides a default no-argument constructor.
+
+But if you declare any constructor yourself, Java doesn't automatically add the no-argument constructor.
+
+Why asked?
+
+Extremely common constructor trap.
+
+Q16. What is this?
+
+Answer:
+
+this refers to the current object.
+
+It is commonly used to distinguish instance variables from parameters and to invoke another constructor using this().
+
+Q17. What is super?
+
+Answer:
+
+super refers to the immediate parent class. It can be used to access parent members and invoke the parent constructor using super().
+
+Q18. this() vs super()?
+
+Answer:
+
+this();
+
+calls another constructor in the same class.
+
+super();
+
+calls a constructor of the parent class.
+
+Both must appear as the first statement in a constructor.
+
+Also, you cannot use both directly in the same constructor because both would need to be first.
+
+Q19. What are access modifiers?
+
+Answer:
+
+Java has:
+
+private
+default/package-private
+protected
+public
+
+They control where a class member can be accessed.
+
+Q20. Which is the most restrictive access modifier?
+
+Answer:
+
+private.
+
+It restricts access to the declaring class.
+
+Q21. Which access modifier provides the widest access?
+
+Answer:
+
+public.
+
+Q22. What is default access?
+
+Answer:
+
+When no access modifier is specified, the member has package-private access.
+
+It is accessible within the same package.
+
+Q23. Explain protected.
+
+Answer:
+
+protected members are accessible within the same package and are also accessible to subclasses outside the package, subject to Java's protected-access rules.
+
+Why asked?
+
+protected is frequently misunderstood.
+
+Q24. Can a top-level class be private?
+
+Answer:
+
+No.
+
+A top-level class can be:
+
+public
+
+or:
+
+package-private
+
+Nested classes can use private and protected.
+
+Q25. Can a constructor be private?
+
+Answer:
+
+Yes.
+
+class Singleton {
+
+    private Singleton() {
+    }
+}
+
+This prevents external code from directly creating objects.
+
+Why asked?
+
+Tests access modifiers plus constructor knowledge.
+
+Q26. Can an abstract class have a constructor?
+
+Answer:
+
+Yes.
+
+Even though you cannot directly instantiate the abstract class, its constructor executes when a concrete subclass object is created.
+
+Q27. Can an abstract class have non-abstract methods?
+
+Answer:
+
+Yes.
+
+abstract class Animal {
+
+    abstract void sound();
+
+    void eat() {
+        System.out.println("Eating");
+    }
+}
+Q28. Can an interface have constructors?
+
+Answer:
+
+No.
+
+Interfaces cannot be instantiated and therefore don't have constructors.
+
+Q29. Can a private method be overridden?
+
+Answer:
+
+No.
+
+A private method is not inherited by subclasses, so it cannot be overridden.
+
+Q30. Can a final method be overridden?
+
+Answer:
+
+No.
+
+final prevents method overriding.
+
+Q31. Can a final class be inherited?
+
+Answer:
+
+No.
+
+final class A {
+}
+
+cannot be extended.
+
+Q32. Can static methods be overridden?
+
+Answer:
+
+No.
+
+Static methods belong to the class rather than participating in runtime overriding. A static method with the same signature in a child class is method hiding.
+
+Q33. What is dynamic method dispatch?
+
+Answer:
+
+It is the mechanism by which Java determines the overridden instance method to execute at runtime based on the actual object.
+
+Animal animal = new Dog();
+
+animal.sound();
+
+If Dog overrides sound(), the Dog implementation executes.
+
+Q34. What is IS-A?
+
+Inheritance.
+
+Dog IS-A Animal
+class Dog extends Animal
+Q35. What is HAS-A?
+
+Composition/aggregation relationship.
+
+Car HAS-A Engine
+class Car {
+    Engine engine;
+}
+38. Interview Code-Tracing Questions
+
+These are especially valuable because interviewers love making you predict output.
+
+Question
+class A {
+
+    A() {
+        System.out.println("A");
+    }
+}
+
+class B extends A {
+
+    B() {
+        System.out.println("B");
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+        B b = new B();
+    }
+}
+Answer
+A
+B
+
+Because the child constructor implicitly invokes super() first.
+
+39. Another very important one
+class Parent {
+
+    void show() {
+        System.out.println("Parent");
+    }
+}
+
+class Child extends Parent {
+
+    @Override
+    void show() {
+        System.out.println("Child");
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Parent p = new Child();
+
+        p.show();
+    }
+}
+
+Output:
+
+Child
+
+Why?
+
+Because overridden instance methods use runtime polymorphism.
+
+40. One more classic
+class Parent {
+
+    static void show() {
+        System.out.println("Parent");
+    }
+}
+
+class Child extends Parent {
+
+    static void show() {
+        System.out.println("Child");
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Parent p = new Child();
+
+        p.show();
+    }
+}
+
+Output:
+
+Parent
+
+Why?
+
+Because static methods are resolved using the reference type, not dynamically using the object type.
+
+This is method hiding, not overriding.
+
+
+
+
+
+
