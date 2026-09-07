@@ -9,7 +9,8 @@ What are the four pillars of OOP in Java? Explain each with a practical example.
 
 Q2 — Interface vs Abstract Class
 
-Suppose you are designing a payment system where CreditCardPayment, UPIPayment, and NetBankingPayment all need to implement pay(). Would you use an interface, an abstract class, or both? Why?
+Suppose you are designing a payment system where CreditCardPayment, UPIPayment, and NetBankingPayment all need to implement pay(). Would you use an interface, 
+an abstract class, or both? Why?
 
 Q3 — Access Modifiers
 
@@ -124,7 +125,8 @@ Given a list of Employee objects, use Streams to group employees by department a
 
 Q6 — Exception Handling + Design
 
-You are developing a REST API. How would you design exception handling so that database exceptions, validation errors, resource-not-found errors, and unexpected errors return appropriate responses to the client?
+You are developing a REST API. How would you design exception handling so that database exceptions, validation errors, resource-not-found errors,
+and unexpected errors return appropriate responses to the client?
 
 ☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
 
@@ -136,7 +138,8 @@ Question Bank 5
 
 Q1 — Concurrency
 
-Explain the difference between synchronized, volatile, AtomicInteger, and Lock. Suppose multiple threads increment a shared counter. Which would you choose in different situations and why?
+Explain the difference between synchronized, volatile, AtomicInteger, and Lock. Suppose multiple threads increment a shared counter. 
+Which would you choose in different situations and why?
 
 Q2 — Deadlock
 
@@ -144,11 +147,13 @@ What is a deadlock? Construct a Java example that can produce a deadlock and exp
 
 Q3 — HashMap + Object Contract
 
-Suppose you create an Employee class and override equals() but forget to override hashCode(). What problems can occur when using Employee as a key in a HashMap or as an element in a HashSet?
+Suppose you create an Employee class and override equals() but forget to override hashCode(). What problems can occur when using Employee
+as a key in a HashMap or as an element in a HashSet?
 
 Q4 — Generics
 
-Explain ? extends T vs ? super T. Given a method that needs to read from one collection and another method that needs to add objects into a collection, demonstrate which wildcard you would use and why.
+Explain ? extends T vs ? super T. Given a method that needs to read from one collection and another method that needs to add objects into 
+a collection, demonstrate which wildcard you would use and why.
 
 Q5 — Streams
 
@@ -156,7 +161,10 @@ Are Java Streams lazy? Explain intermediate vs terminal operations. What happens
 
 Q6 — Integrated Design Challenge
 
-You are designing an order-processing service. Multiple orders can be processed concurrently, orders have different types, collections are used to maintain order state, Streams are used for reporting, and different failures need different exception handling. Design the core Java classes and explain where you would use OOP, interfaces/abstract classes, Generics, Collections, concurrency, Streams/Lambdas, and exception handling.
+You are designing an order-processing service. Multiple orders can be processed concurrently, orders have different types, 
+collections are used to maintain order state, Streams are used for reporting, and different failures need different exception handling.
+Design the core Java classes and explain where you would use OOP, interfaces/abstract classes, Generics, Collections, concurrency, Streams/Lambdas, 
+and exception handling.
 
 ☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
 
