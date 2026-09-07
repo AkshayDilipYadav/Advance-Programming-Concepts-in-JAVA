@@ -3,26 +3,91 @@
 
 Question Bank 1
 
-Q1 — OOP
+Q1.1 — OOP
 
 What are the four pillars of OOP in Java? Explain each with a practical example.
 
+Q1.2 — OOP Design
+
+What is the difference between inheritance and composition? If you were designing an e-commerce system, when would you prefer composition over inheritance?
+
+
+Q1.3 — OOP
+
+What is encapsulation? Why is making fields private and exposing controlled access through methods considered good design? Can you demonstrate it with code?
+
+
+
 Q2 — Interface vs Abstract Class
 
-Suppose you are designing a payment system where CreditCardPayment, UPIPayment, and NetBankingPayment all need to implement pay(). Would you use an interface, 
+Suppose you are designing a payment system where CreditCardPayment, UPIPayment, and NetBankingPayment all need to implement pay().
+Would you use an interface, 
 an abstract class, or both? Why?
 
-Q3 — Access Modifiers
+Q1.1 — Access Modifiers
 
 Explain private, default, protected, and public in Java. Which one would you normally use for class fields and why?
+
+
+Q1.2 — Access Modifiers
+
+Can a subclass access a private member of its parent class? What about a protected member? Explain what happens across different packages.
+
+Q2 — Polymorphism
+
+Explain method overloading vs method overriding. Can you demonstrate both with Java code? Also explain which one represents runtime polymorphism.
+
+
+
+
+
+
+
 
 Q4 — Collections
 
 What is the difference between ArrayList, LinkedList, HashSet, and HashMap? When would you choose each one?
 
+Q5 — HashMap
+
+How does HashMap work internally? Explain hashing, buckets, collisions, equals(), and hashCode().
+
+
+Q4 — Collections
+
+What is the difference between List, Set, and Map? Why does Map not extend the Collection interface?
+
+Q4 — Collections
+
+You need to maintain users in the order they were inserted, prevent duplicate users, and perform fast lookup by user ID. 
+Which collection(s) would you choose and why?
+
+Q3 — HashMap + Object Contract
+
+Suppose you create an Employee class and override equals() but forget to override hashCode(). What problems can occur when using Employee
+as a key in a HashMap or as an element in a HashSet?
+
+
+
+
 Q5 — Exception Handling
 
 What is the difference between checked and unchecked exceptions? When would you create your own custom exception?
+
+
+Q5 — Exception Handling
+
+Explain try, catch, finally, throw, and throws. What happens if an exception is thrown inside a finally block?
+
+
+Q6 — Exception Handling + Design
+
+You are developing a REST API. How would you design exception handling so that database exceptions, validation errors, resource-not-found errors,
+and unexpected errors return appropriate responses to the client?
+
+
+
+
 
 Q6 — Streams & Lambdas
 
@@ -36,13 +101,8 @@ Given a list of employees, write Java code using Streams and Lambdas to find emp
 
 
 Question Bank 2
-Q1 — OOP Design
 
-What is the difference between inheritance and composition? If you were designing an e-commerce system, when would you prefer composition over inheritance?
 
-Q2 — Polymorphism
-
-Explain method overloading vs method overriding. Can you demonstrate both with Java code? Also explain which one represents runtime polymorphism.
 
 Q3 — Concurrency
 
@@ -52,9 +112,36 @@ Q4 — Generics
 
 Why do we use Generics in Java? What problem does List<String> solve compared with using a raw List? Explain type safety and type erasure.
 
-Q5 — HashMap
 
-How does HashMap work internally? Explain hashing, buckets, collisions, equals(), and hashCode().
+
+Q3 — Concurrency
+
+What is a race condition? Write or explain a simple Java example where two threads modify the same variable and produce an unexpected result.
+
+
+
+Q1 — Concurrency
+
+You have a bank account and two threads simultaneously withdraw money from it. How can this result in an incorrect balance? Write a Java solution using synchronization.
+
+Q2 — Concurrent Collections
+
+Multiple threads need to read and modify a shared HashMap. Would you use HashMap, Collections.synchronizedMap(), or ConcurrentHashMap? Explain your choice.
+
+
+Q1 — Concurrency
+
+Explain the difference between synchronized, volatile, AtomicInteger, and Lock. Suppose multiple threads increment a shared counter. 
+Which would you choose in different situations and why?
+
+Q2 — Deadlock
+
+What is a deadlock? Construct a Java example that can produce a deadlock and explain at least two ways to prevent or avoid it.
+
+
+
+
+
 
 Q6 — Streams
 
@@ -70,25 +157,8 @@ What is the difference between map(), filter(), and reduce() in Java Streams? Gi
 
 Question Bank 3
 
-Q1 — OOP
 
-What is encapsulation? Why is making fields private and exposing controlled access through methods considered good design? Can you demonstrate it with code?
 
-Q2 — Access Modifiers
-
-Can a subclass access a private member of its parent class? What about a protected member? Explain what happens across different packages.
-
-Q3 — Concurrency
-
-What is a race condition? Write or explain a simple Java example where two threads modify the same variable and produce an unexpected result.
-
-Q4 — Collections
-
-What is the difference between List, Set, and Map? Why does Map not extend the Collection interface?
-
-Q5 — Exception Handling
-
-Explain try, catch, finally, throw, and throws. What happens if an exception is thrown inside a finally block?
 
 Q6 — Lambdas
 
@@ -103,30 +173,18 @@ What is a functional interface? What is the relationship between a functional in
 
 Question Bank 4
 
-Q1 — Concurrency
-
-You have a bank account and two threads simultaneously withdraw money from it. How can this result in an incorrect balance? Write a Java solution using synchronization.
-
-Q2 — Concurrent Collections
-
-Multiple threads need to read and modify a shared HashMap. Would you use HashMap, Collections.synchronizedMap(), or ConcurrentHashMap? Explain your choice.
 
 Q3 — Generics
 
 Design a generic Repository<T> class that can store and retrieve objects of different types. Explain why Generics are better than using Object.
 
-Q4 — Collections
 
-You need to maintain users in the order they were inserted, prevent duplicate users, and perform fast lookup by user ID. Which collection(s) would you choose and why?
 
 Q5 — Streams
 
 Given a list of Employee objects, use Streams to group employees by department and find the highest-paid employee in each department.
 
-Q6 — Exception Handling + Design
 
-You are developing a REST API. How would you design exception handling so that database exceptions, validation errors, resource-not-found errors,
-and unexpected errors return appropriate responses to the client?
 
 ☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
 
@@ -136,19 +194,7 @@ and unexpected errors return appropriate responses to the client?
 
 Question Bank 5
 
-Q1 — Concurrency
 
-Explain the difference between synchronized, volatile, AtomicInteger, and Lock. Suppose multiple threads increment a shared counter. 
-Which would you choose in different situations and why?
-
-Q2 — Deadlock
-
-What is a deadlock? Construct a Java example that can produce a deadlock and explain at least two ways to prevent or avoid it.
-
-Q3 — HashMap + Object Contract
-
-Suppose you create an Employee class and override equals() but forget to override hashCode(). What problems can occur when using Employee
-as a key in a HashMap or as an element in a HashSet?
 
 Q4 — Generics
 
