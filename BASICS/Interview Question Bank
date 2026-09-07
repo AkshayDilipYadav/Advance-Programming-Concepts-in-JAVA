@@ -1,5 +1,5 @@
 ☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
-
+14 problems
 
 Question Bank 1
 
@@ -39,7 +39,7 @@ Explain method overloading vs method overriding. Can you demonstrate both with J
 
 
 
-
+👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉 COLLECTIONS
 
 
 
@@ -68,7 +68,7 @@ Suppose you create an Employee class and override equals() but forget to overrid
 as a key in a HashMap or as an element in a HashSet?
 
 
-
+👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉 EXCEPTION HANDLING
 
 Q5 — Exception Handling
 
@@ -89,16 +89,13 @@ and unexpected errors return appropriate responses to the client?
 
 
 
-Q6 — Streams & Lambdas
-
-Given a list of employees, write Java code using Streams and Lambdas to find employees whose salary is greater than ₹50,000 and collect their names into a list.
 
 ☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
 
 
 
 ☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
-
+8 problems
 
 Question Bank 2
 
@@ -107,10 +104,6 @@ Question Bank 2
 Q3 — Concurrency
 
 What is the difference between a process and a thread? Why would you use multiple threads in a backend application?
-
-Q4 — Generics
-
-Why do we use Generics in Java? What problem does List<String> solve compared with using a raw List? Explain type safety and type erasure.
 
 
 
@@ -122,11 +115,13 @@ What is a race condition? Write or explain a simple Java example where two threa
 
 Q1 — Concurrency
 
-You have a bank account and two threads simultaneously withdraw money from it. How can this result in an incorrect balance? Write a Java solution using synchronization.
+You have a bank account and two threads simultaneously withdraw money from it.
+How can this result in an incorrect balance? Write a Java solution using synchronization.
 
 Q2 — Concurrent Collections
 
-Multiple threads need to read and modify a shared HashMap. Would you use HashMap, Collections.synchronizedMap(), or ConcurrentHashMap? Explain your choice.
+Multiple threads need to read and modify a shared HashMap. Would you use HashMap,
+Collections.synchronizedMap(), or ConcurrentHashMap? Explain your choice.
 
 
 Q1 — Concurrency
@@ -143,9 +138,6 @@ What is a deadlock? Construct a Java example that can produce a deadlock and exp
 
 
 
-Q6 — Streams
-
-What is the difference between map(), filter(), and reduce() in Java Streams? Give a practical example where all three could be used together.
 
 
 ☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
@@ -155,14 +147,42 @@ What is the difference between map(), filter(), and reduce() in Java Streams? Gi
 ☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
 
 
-Question Bank 3
+Question Bank 3 5 problems
 
 
 
 
 Q6 — Lambdas
 
-What is a functional interface? What is the relationship between a functional interface and a Lambda expression? Demonstrate it using your own functional interface.
+What is a functional interface? What is the relationship between a functional interface and a Lambda expression?
+
+Demonstrate it using your own functional interface.
+
+
+
+Q5 — Streams
+
+Given a list of Employee objects, use Streams to group employees by department and find the highest-paid employee in each department.
+
+
+
+Q5 — Streams
+
+Are Java Streams lazy? Explain intermediate vs terminal operations. 
+What happens internally when you execute a pipeline containing filter(), map(), and collect()?
+
+
+
+
+Q6 — Streams & Lambdas
+
+Given a list of employees, write Java code using Streams and Lambdas to find employees
+whose salary is greater than ₹50,000 and collect their names into a list.
+
+
+Q6 — Streams
+
+What is the difference between map(), filter(), and reduce() in Java Streams? Give a practical example where all three could be used together.
 
 ☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
 
@@ -180,9 +200,25 @@ Design a generic Repository<T> class that can store and retrieve objects of diff
 
 
 
-Q5 — Streams
+Q4 — Generics
 
-Given a list of Employee objects, use Streams to group employees by department and find the highest-paid employee in each department.
+Explain ? extends T vs ? super T. Given a method that needs to read from one collection and another method that needs to add objects into 
+a collection, demonstrate which wildcard you would use and why.
+
+Q4 — Generics
+
+Why do we use Generics in Java? What problem does List<String> solve compared with using a raw List? Explain type safety and type erasure.
+
+
+
+Q6 — Integrated Design Challenge
+
+You are designing an order-processing service. Multiple orders can be processed concurrently, orders have different types, 
+collections are used to maintain order state, Streams are used for reporting, and different failures need different exception handling.
+Design the core Java classes and explain where you would use OOP, interfaces/abstract classes, Generics, Collections, concurrency, Streams/Lambdas, 
+and exception handling.
+
+
 
 
 
@@ -195,22 +231,6 @@ Given a list of Employee objects, use Streams to group employees by department a
 Question Bank 5
 
 
-
-Q4 — Generics
-
-Explain ? extends T vs ? super T. Given a method that needs to read from one collection and another method that needs to add objects into 
-a collection, demonstrate which wildcard you would use and why.
-
-Q5 — Streams
-
-Are Java Streams lazy? Explain intermediate vs terminal operations. What happens internally when you execute a pipeline containing filter(), map(), and collect()?
-
-Q6 — Integrated Design Challenge
-
-You are designing an order-processing service. Multiple orders can be processed concurrently, orders have different types, 
-collections are used to maintain order state, Streams are used for reporting, and different failures need different exception handling.
-Design the core Java classes and explain where you would use OOP, interfaces/abstract classes, Generics, Collections, concurrency, Streams/Lambdas, 
-and exception handling.
 
 ☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
 
