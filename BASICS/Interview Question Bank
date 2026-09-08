@@ -41,7 +41,32 @@ Explain method overloading vs method overriding. Can you demonstrate both with J
 
 👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉 COLLECTIONS
 
+                   Iterable
+                       |
+                  Collection
+                       |
+        +--------------+--------------+
+        |              |              |
+       List            Set           Queue
+        |              |              |
+   +----+----+     +----+----+     +---+----+
+   |         |     |         |     |        |
+ArrayList LinkedList HashSet TreeSet PriorityQueue
+              |
+           Deque
+              |
+         ArrayDeque
 
+
+                     Map
+                     |
+          +----------+----------+
+          |                     |
+       HashMap              SortedMap
+          |                     |
+    LinkedHashMap          TreeMap
+                                |
+                           NavigableMap
 
 
 Q4 — Collections
