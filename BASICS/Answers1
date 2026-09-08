@@ -1,0 +1,1031 @@
+♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ Collections ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ 
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+Q1. What is the difference between ArrayList, LinkedList, HashSet, and HashMap? When would you choose each one?
+
+⭐️⭐️⭐️⭐️⭐️ ArrayList ⭐️⭐️⭐️⭐️⭐️
+
+ArrayList is backed by a dynamically resizable array. It provides fast random access using an index, typically O(1),
+but inserting or removing elements in the middle is O(n) because elements need to be shifted.
+
+I would choose ArrayList when I need an ordered collection, allow duplicates,
+and frequently access elements by index. It is generally my default choice for a List.
+
+⭐️⭐️⭐️⭐️⭐️ Linked list ⭐️⭐️⭐️⭐️⭐️
+
+
+LinkedList is based on a doubly linked list. Accessing an element by index is O(n),
+but insertion or removal at the beginning or end is O(1) when the node position is already known.
+
+I would use it when I specifically need linked-list or deque-style operations. 
+In modern Java applications, however, I would often prefer ArrayDeque for queue or deque use cases rather than choosing LinkedList automatically.
+
+
+⭐️⭐️⭐️⭐️⭐️ Hashset ⭐️⭐️⭐️⭐️⭐️
+
+HashSet stores unique elements and does not guarantee iteration order. It is hash-table based and provides average O(1) lookup, insertion, and deletion.
+
+I would choose HashSet when uniqueness is the primary requirement—for example, maintaining a set of unique user IDs or checking whether an element has already been processed.
+
+
+
+⭐️⭐️⭐️⭐️⭐️ Hashmap ⭐️⭐️⭐️⭐️⭐️
+
+
+HashMap stores data as key-value pairs. Keys are unique, while values can be duplicated. It provides average O(1) lookup, insertion, and deletion by key.
+
+I would choose HashMap when I need to associate one piece of information with another—for example, mapping a userId to a User object or maintaining a frequency count.
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+
+Q3. How does HashMap work internally? Explain hashing, buckets, collisions, equals(), and hashCode().
+
+
+
+HashMap stores key-value pairs using a hash table. When we insert a key,
+HashMap calculates the key's hash using hashCode(),
+processes that hash to determine a bucket index, and stores the entry in that bucket. During lookup, 
+it calculates the hash again to locate the bucket and then uses equals() to identify the exact key, 
+especially when multiple keys are in the same bucket due to collisions. If two different keys map to the same bucket, 
+that's called a collision, and HashMap stores both entries in that bucket. In modern Java, 
+heavily-collided buckets can be converted from a linked structure into a balanced tree. 
+Assuming good hash distribution, get, put, and remove are O(1) on average.
+
+
+
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+Q3. What is the difference between List, Set, and Map? Why does Map not extend the Collection interface?
+
+List, Set, and Queue are interfaces that extend the Collection interface and represent collections of individual elements.
+
+List allows duplicates and maintains positional ordering, while Set represents unique elements.
+
+Map is also part of the Java Collections Framework, 
+but it is a separate interface hierarchy because it represents key-value mappings rather than a collection of individual elements.
+Its operations are based on keys and values, such as put(), get(), and containsKey(), so it does not naturally fit the Collection abstraction.
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+
+Q4. You need to maintain users in the order they were inserted, prevent duplicate users, and perform fast lookup by user ID. 
+Which collection(s) would you choose and why?
+
+
+I would use a LinkedHashMap<UserId, User>.
+It gives me unique user IDs because Map keys are unique, 
+maintains insertion order because LinkedHashMap maintains a linked ordering of entries, 
+and provides O(1) average-time lookup by user ID through hashing. 
+If I only needed uniqueness and insertion order without key-based lookup, I would use LinkedHashSet instead.
+
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+
+Q5. Suppose you create an Employee class and override equals() but forget to override hashCode(). What problems can occur when using Employee
+as a key in a HashMap or as an element in a HashSet?
+
+
+
+It violates the equals-hashCode contract. If two Employee objects are considered equal by equals(), 
+they must return the same hashCode(). If hashCode() isn't overridden, 
+two logically equal Employee objects may have different hash codes and therefore be placed in different buckets.
+In a HashSet, this can allow logically duplicate objects to be stored. In a HashMap,
+a logically equal key may fail to retrieve an existing value because the lookup goes to a 
+different bucket and never reaches the equals() comparison. Therefore, whenever we override equals(), we should also override hashCode() consistently.
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+
+
+♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ OOPS ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ 
+
+
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+
+Q1. What are the four pillars of OOP in Java? Explain each with a practical example.
+
+
+The four pillars of Object-Oriented Programming (OOP) in Java are:
+
+Encapsulation
+Inheritance
+Polymorphism
+Abstraction
+
+
+1. Encapsulation
+
+
+Encapsulation is the practice of bundling data and the methods that operate on that data within a class and 
+restricting direct access to the internal state. In Java, this is commonly achieved using private fields with controlled access through methods.
+
+class BankAccount {
+
+    private double balance;
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        }
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+}
+
+BankAccount account = new BankAccount();
+
+account.deposit(5000);
+
+System.out.println(account.getBalance());
+
+2. Inheritance
+
+Inheritance allows a class to acquire fields and behavior from another class,
+enabling code reuse and specialization. In Java, it is implemented using extends.
+For example, Developer can extend Employee and inherit common employee behavior while adding developer-specific functionality."
+
+
+class Employee {
+
+    String name;
+    int employeeId;
+
+    void work() {
+        System.out.println("Employee is working");
+    }
+}
+
+class Developer extends Employee {
+
+    void writeCode() {
+        System.out.println("Writing Java code");
+    }
+}
+
+class Manager extends Employee {
+
+    void conductMeeting() {
+        System.out.println("Conducting meeting");
+    }
+}
+
+
+Developer developer = new Developer();
+
+developer.name = "Akshay";
+developer.employeeId = 101;
+
+developer.work();
+developer.writeCode();
+
+
+Developer gets name, employeeId, and work() from Employee.
+
+
+3. Polymorphism
+
+
+Polymorphism means one interface or reference can represent different implementations 
+and the same method call can behave differently depending on the actual object. In Java, runtime polymorphism is achieved through method overriding, 
+while compile-time polymorphism is achieved through method overloading.
+
+class Employee {
+
+    void work() {
+        System.out.println("Employee is working");
+    }
+}
+
+class Developer extends Employee {
+
+    @Override
+    void work() {
+        System.out.println("Developer is writing code");
+    }
+}
+
+
+class Manager extends Employee {
+
+    @Override
+    void work() {
+        System.out.println("Manager is managing the team");
+    }
+}
+
+Employee employee1 = new Developer();
+Employee employee2 = new Manager();
+
+employee1.work();
+employee2.work();
+
+
+
+4. Abstraction : 
+
+Abstraction means exposing essential behavior while hiding implementation details. 
+In Java, we commonly achieve it using interfaces and abstract classes.
+For example, a PaymentService interface can expose a pay() method while different implementations handle UPI or credit-card processing internally.
+
+
+
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+
+Q2. What is the difference between inheritance and composition? If you were designing an e-commerce system, when would you prefer composition over inheritance?
+
+
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+
+Q3. What is encapsulation? Why is making fields private and exposing controlled access through methods considered good design? Can you demonstrate it with code?
+
+
+
+Encapsulation is the OOP principle of bundling an object's data and the behavior that operates on that data together,
+while restricting direct access to the object's internal state.
+
+In Java, we commonly achieve this by making fields private and exposing controlled access through methods such as getters, setters, or domain-specific methods.
+
+
+public class BankAccount {
+
+    private double balance;
+
+    public BankAccount(double initialBalance) {
+        if (initialBalance < 0) {
+            throw new IllegalArgumentException("Initial balance cannot be negative");
+        }
+
+        this.balance = initialBalance;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void deposit(double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Deposit must be positive");
+        }
+
+        balance += amount;
+    }
+
+    public void withdraw(double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Withdrawal must be positive");
+        }
+
+        if (amount > balance) {
+            throw new IllegalArgumentException("Insufficient balance");
+        }
+
+        balance -= amount;
+    }
+}
+
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+Q4. Difference between Abstract class and interface. And when would you prefer one over another
+
+An abstract class is useful when I want to provide a common base for closely related classes, including shared state, 
+constructors, and common implementation, while leaving some behavior abstract. 
+An interface is primarily a contract or capability that different classes can implement, without requiring them to share the same class hierarchy.
+
+For example, I might use an abstract Payment class if different payment types share fields like
+amount and common validation logic. I'd use a PaymentProcessor interface when I want different
+implementations such as Stripe, Razorpay, or another provider to follow the same contract.
+
+The key distinction is that abstract classes are suited for shared identity, state, and implementation,
+while interfaces are suited for contracts, capabilities, and loose coupling. Since Java supports multiple
+interfaces but only single class inheritance, interfaces are often preferred when designing flexible enterprise systems.
+
+I would choose an abstract class when the classes have a strong 'is-a' relationship and need to share common state or implementation. For example, 
+different types of payments may share amount, validation logic, and common processing behavior."
+
+"I would choose an interface when I mainly want to define a contract or capability that can be implemented by potentially unrelated classes. 
+Interfaces are also preferable when I want a class to support multiple capabilities or when I want to program against an abstraction and easily substitute implementations.
+
+
+
+
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+Q5. Suppose you are designing a payment system where CreditCardPayment, UPIPayment, and NetBankingPayment all need to implement pay().
+Would you use an interface, 
+an abstract class, or both? Why?
+
+
+public interface Payment {
+
+    void pay(double amount);
+}
+
+public class CreditCardPayment implements Payment {
+
+    @Override
+    public void pay(double amount) {
+        System.out.println("Processing credit card payment: " + amount);
+    }
+}
+
+
+
+public class UPIPayment implements Payment {
+
+    @Override
+    public void pay(double amount) {
+        System.out.println("Processing UPI payment: " + amount);
+    }
+}
+
+
+public class NetBankingPayment implements Payment {
+
+    @Override
+    public void pay(double amount) {
+        System.out.println("Processing net banking payment: " + amount);
+    }
+}
+
+
+
+PaymentService service = new PaymentService();
+
+service.makePayment(new CreditCardPayment(), 1000);
+service.makePayment(new UPIPayment(), 2000);
+service.makePayment(new NetBankingPayment(), 3000);
+
+
+2. When would I add an abstract class?
+
+Suppose we discover that all payment methods have common behavior.
+
+For example:
+
+validate amount
+generate transaction ID
+log transaction
+maintain payment status
+
+Then an abstract class becomes useful.
+
+
+public abstract class Payment {
+
+    protected String transactionId;
+    protected double amount;
+
+    public Payment(double amount) {
+        this.amount = amount;
+        this.transactionId = generateTransactionId();
+    }
+
+    protected void validateAmount() {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Amount must be positive");
+        }
+    }
+
+    protected String generateTransactionId() {
+        return "TXN-" + System.currentTimeMillis();
+    }
+
+    public abstract void pay();
+}
+
+
+public class CreditCardPayment extends Payment {
+
+    public CreditCardPayment(double amount) {
+        super(amount);
+    }
+
+    @Override
+    public void pay() {
+        validateAmount();
+
+        System.out.println(
+            "Processing Credit Card payment: " + amount
+        );
+    }
+}
+
+
+
+public class UPIPayment extends Payment {
+
+    public UPIPayment(double amount) {
+        super(amount);
+    }
+
+    @Override
+    public void pay() {
+        validateAmount();
+
+        System.out.println(
+            "Processing UPI payment: " + amount
+        );
+    }
+}
+
+
+I would start with an interface because the core requirement is that every payment implementation must provide pay(). 
+CreditCardPayment, UPIPayment, and NetBankingPayment can implement the same Payment contract, and the payment service
+can depend on the Payment interface rather than a concrete implementation. This gives us polymorphism and loose coupling.
+
+If the different payment implementations also share common state or behavior, such as transaction ID generation, 
+amount validation, logging, or common payment lifecycle logic, I would introduce an abstract BasePayment class that 
+implements the Payment interface. The concrete payment classes would then extend BasePayment.
+
+So I wouldn't choose an abstract class simply because the classes are related. I'd use an interface for the contract 
+and an abstract class only when there is meaningful shared state or implementation.
+
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+
+Q . Explain private, default, protected, and public in Java. Which one would you normally use for class fields and why?
+
+
+Java has four access levels: private, package-private or default, protected, and public. 
+Private is accessible only within the same class. Default is accessible within the same package. 
+Protected is accessible within the same package and by subclasses, including subclasses in other packages subject to Java's protected access rules. 
+Public is accessible from anywhere.
+
+For class fields, 
+I would normally use private because fields represent an object's internal state. 
+Keeping them private supports encapsulation and prevents other classes from directly modifying the object's state. 
+If access is required, I expose a controlled method such as a getter or, preferably when there's business logic involved, a domain-specific method like deposit() or withdraw().
+
+I would use protected only when there is a deliberate inheritance-based reason for subclasses to access something, 
+default access when package-level visibility is intentionally part of the design, and public when the member is genuinely part of the external API.
+
+
+
+
+
+
+
+
+
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+
+
+Q . Can a subclass access a private member of its parent class? What about a protected member? Explain what happens across different packages.
+
+A subclass cannot directly access a private member of its parent because private members are accessible 
+only within the class where they are declared. The subclass can access that state indirectly through an inherited public or protected method if the parent exposes one.
+
+A protected member can be accessed by subclasses. It is also accessible to classes in the same package.
+If the subclass is in a different package, it can still access the protected member through inheritance,
+but an unrelated class in that package cannot access it. Also, the subclass cannot simply access the protected 
+member through an arbitrary Parent object reference from another package.
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+Q . Explain method overloading vs method overriding. Can you demonstrate both with Java code? Also explain which one represents runtime polymorphism.
+
+
+
+Overloading = same method name, different parameters → compile time
+
+Overriding = same method signature, different implementation in child → runtime
+
+
+class Calculator {
+
+    int add(int a, int b) {
+        return a + b;
+    }
+
+    int add(int a, int b, int c) {
+        return a + b + c;
+    }
+
+    double add(double a, double b) {
+        return a + b;
+    }
+}
+
+
+Calculator calculator = new Calculator();
+
+calculator.add(10, 20);
+calculator.add(10, 20, 30);
+calculator.add(10.5, 20.5);
+
+
+Method overloading is compile-time polymorphism.
+
+
+
+
+2. Method Overriding
+
+Method overriding happens when a subclass provides its own implementation of a method inherited from its parent class.
+
+
+
+class Payment {
+
+    void pay() {
+        System.out.println("Processing payment");
+    }
+}
+
+
+class UPIPayment extends Payment {
+
+    @Override
+    void pay() {
+        System.out.println("Processing UPI payment");
+    }
+}
+
+class CreditCardPayment extends Payment {
+
+    @Override
+    void pay() {
+        System.out.println("Processing credit card payment");
+    }
+}
+
+
+
+
+Method overloading occurs when a class has multiple methods with the same name but different parameter lists. 
+The compiler determines which overloaded method to invoke based on the arguments, so overloading is considered compile-time polymorphism.
+
+Method overriding occurs when a subclass provides a different implementation of an inherited method with the same method signature.
+When we have a parent reference pointing to a child object, Java determines at runtime which overridden implementation to execute.
+This is called runtime polymorphism or dynamic method dispatch.
+
+For example, if Payment payment = new UPIPayment(), and both Payment and UPIPayment define pay(), 
+calling payment.pay() executes UPIPayment's implementation. That's runtime polymorphism.
+
+
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+
+
+
+♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ Concurrency ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ 
+
+
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+Q 1. What is the difference between a process and a thread? Why would you use multiple threads in a backend application?
+
+
+A process is an independent program in execution with its own memory space and resources, 
+whereas a thread is a lightweight unit of execution within a process. 
+Threads within the same process share resources such as heap memory, while each thread has its own stack and execution context.
+
+Processes are more isolated from each other, whereas threads are cheaper to create and have lower context-switching overhead, 
+but shared memory also means threads require proper synchronization to avoid race conditions.
+
+In a backend application, I would use multiple threads when tasks can execute concurrently—for example, 
+handling multiple HTTP requests, performing database or network I/O, processing background jobs, 
+or executing independent computations. This allows the application to make better use of CPU resources and avoid blocking one request while another task is waiting for I/O.
+
+For example, in a web server, multiple threads can process multiple client requests concurrently instead of forcing each request to wait for the previous request to complete.
+
+In short: process = independent execution environment; thread = execution unit within a process. 
+Multiple threads improve concurrency and responsiveness, especially for I/O-bound backend workloads.
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+Q 2. What is a race condition? Write or explain a simple Java example where two threads modify the same variable and produce an unexpected result.
+
+
+A race condition occurs when multiple threads access and modify the same shared data concurrently,
+and the final result depends on the timing or order in which the threads execute. This can produce unpredictable or incorrect results.
+
+
+class Counter {
+    int count = 0;
+
+    void increment() {
+        count++;
+    }
+}
+
+
+Counter counter = new Counter();
+
+Thread t1 = new Thread(() -> {
+    for (int i = 0; i < 1000; i++) {
+        counter.increment();
+    }
+});
+
+Thread t2 = new Thread(() -> {
+    for (int i = 0; i < 1000; i++) {
+        counter.increment();
+    }
+});
+
+t1.start();
+t2.start();
+
+t1.join();
+t2.join();
+
+System.out.println(counter.count);
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+
+Q 3. You have a bank account and two threads simultaneously withdraw money from it.
+How can this result in an incorrect balance? Write a Java solution using synchronization.
+
+If two threads simultaneously withdraw money from the same bank account,
+a race condition can occur because the withdrawal operation involves multiple steps: 
+checking the balance and then updating it. Without synchronization, 
+both threads can read the same balance before either one updates it,
+causing the account to allow withdrawals that it should reject and resulting in an incorrect balance.
+
+
+class BankAccount {
+
+    private double balance;
+
+    public BankAccount(double balance) {
+        this.balance = balance;
+    }
+
+    public synchronized void withdraw(double amount) {
+
+        if (balance >= amount) {
+            System.out.println(
+                Thread.currentThread().getName()
+                + " is withdrawing ₹" + amount
+            );
+
+            balance -= amount;
+
+            System.out.println(
+                "Remaining balance: ₹" + balance
+            );
+        } else {
+            System.out.println(
+                Thread.currentThread().getName()
+                + " - Insufficient balance"
+            );
+        }
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+}
+
+
+public class Main {
+
+    public static void main(String[] args)
+            throws InterruptedException {
+
+        BankAccount account = new BankAccount(1000);
+
+        Thread t1 = new Thread(
+            () -> account.withdraw(800),
+            "Thread-1"
+        );
+
+        Thread t2 = new Thread(
+            () -> account.withdraw(800),
+            "Thread-2"
+        );
+
+        t1.start();
+        t2.start();
+
+        t1.join();
+        t2.join();
+
+        System.out.println(
+            "Final balance: ₹" + account.getBalance()
+        );
+    }
+}
+
+
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+
+Q 4. Multiple threads need to read and modify a shared HashMap. Would you use HashMap,
+Collections.synchronizedMap(), or ConcurrentHashMap? Explain your choice.
+
+
+
+If multiple threads need to both read and modify a shared HashMap, I would choose ConcurrentHashMap.
+
+A regular HashMap is not thread-safe. Concurrent reads and writes can lead to race conditions and inconsistent behavior.
+
+Collections.synchronizedMap() makes the map's individual operations synchronized:
+
+Map<String, Integer> map =
+    Collections.synchronizedMap(new HashMap<>());
+
+This is thread-safe, but it uses synchronization around map operations, which can reduce concurrency because operations are more heavily serialized.
+
+ConcurrentHashMap is specifically designed for concurrent access:
+
+Map<String, Integer> map = new ConcurrentHashMap<>();
+
+map.put("A", 100);
+map.put("B", 200);
+
+It allows multiple threads to operate on the map concurrently while maintaining thread safety and generally provides better scalability than a synchronized map.
+
+One important point is that thread-safe individual operations don't automatically make a sequence of operations atomic. For example:
+
+
+
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+Q. Explain the difference between synchronized, volatile, AtomicInteger, and Lock. Suppose multiple threads increment a shared counter. 
+Which would you choose in different situations and why?
+
+1. Synchronised
+
+synchronized provides mutual exclusion and visibility. Only one thread can execute the synchronized critical section at a time.
+
+class Counter {
+    private int count = 0;
+
+    public synchronized void increment() {
+        count++;
+    }
+
+    public synchronized int getCount() {
+        return count;
+    }
+}
+
+I would choose synchronized when:
+
+The operation is simple.
+I need to protect multiple statements or multiple shared variables.
+I want straightforward, readable thread-safety.
+
+
+
+2. volatile
+
+volatile guarantees that changes made by one thread are visible to other threads.
+
+private volatile int count;
+
+But this is not safe:
+
+count++;
+
+Because count++ is actually:
+
+read count
+add 1
+write count
+
+Two threads can read the same value and overwrite each other's updates.
+
+So volatile is appropriate when I need visibility, but not when I need compound-operation atomicity.
+
+For example:
+
+private volatile boolean running = true;
+
+One thread can update running, and another thread will reliably see the change.
+
+
+3. AtomicInteger
+
+AtomicInteger provides atomic operations without explicit locking, using low-level atomic CPU operations such as CAS.
+
+AtomicInteger count = new AtomicInteger(0);
+
+count.incrementAndGet();
+
+This is ideal for a simple shared counter.
+
+class Counter {
+    private final AtomicInteger count = new AtomicInteger();
+
+    public void increment() {
+        count.incrementAndGet();
+    }
+
+    public int getCount() {
+        return count.get();
+    }
+}
+
+I would choose AtomicInteger when:
+
+I only need to perform atomic operations on a single value.
+I want a lightweight solution.
+I don't need to protect a larger critical section.
+
+Common operations include:
+
+incrementAndGet()
+decrementAndGet()
+getAndIncrement()
+compareAndSet()
+addAndGet()
+
+
+
+4. Lock
+
+Lock, commonly ReentrantLock, provides more control than synchronized.
+
+private final Lock lock = new ReentrantLock();
+
+public void increment() {
+    lock.lock();
+    try {
+        count++;
+    } finally {
+        lock.unlock();
+    }
+}
+
+I would choose Lock when I need features that synchronized doesn't provide as conveniently, such as:
+
+lock.tryLock();
+lock.lockInterruptibly();
+
+It is useful when I need:
+
+Timeout-based lock acquisition.
+Interruptible locking.
+More complex locking strategies.
+Multiple conditions using Condition.
+
+synchronized provides mutual exclusion and visibility and is a good default for protecting critical sections. 
+volatile only guarantees visibility and does not make compound operations like count++ atomic. 
+AtomicInteger provides lock-free atomic operations and is my preferred choice for a simple shared counter. 
+Lock, such as ReentrantLock, gives more advanced control like tryLock, timeouts, and interruptible locking. 
+So for a simple counter I'd use AtomicInteger; for a larger critical section I'd use synchronized; for advanced 
+locking requirements I'd use Lock; and I'd use volatile when I only need visibility.
+
+
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+Q . What is a deadlock? Construct a Java example that can produce a deadlock and explain at least two ways to prevent or avoid it.
+
+
+What is a Deadlock?
+
+A deadlock occurs when two or more threads are permanently blocked because each thread is waiting for a lock that another thread holds.
+
+
+Thread 1 → holds Lock A → waiting for Lock B
+Thread 2 → holds Lock B → waiting for Lock A
+
+
+public class DeadlockExample {
+
+    private static final Object lock1 = new Object();
+    private static final Object lock2 = new Object();
+
+    public static void main(String[] args) {
+
+        Thread thread1 = new Thread(() -> {
+            synchronized (lock1) {
+                System.out.println("Thread 1 acquired lock1");
+
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+
+                synchronized (lock2) {
+                    System.out.println("Thread 1 acquired lock2");
+                }
+            }
+        });
+
+        Thread thread2 = new Thread(() -> {
+            synchronized (lock2) {
+                System.out.println("Thread 2 acquired lock2");
+
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+
+                synchronized (lock1) {
+                    System.out.println("Thread 2 acquired lock1");
+                }
+            }
+        });
+
+        thread1.start();
+        thread2.start();
+    }
+}
+
+
+What happens?
+
+Suppose execution happens like this:
+
+Thread 1:
+    acquires lock1
+    waits for lock2
+
+Thread 2:
+    acquires lock2
+    waits for lock1
+
+Now:
+
+Thread 1 → lock1 → waiting for lock2
+Thread 2 → lock2 → waiting for lock1
+
+Both are blocked forever.
+
+
+
+How can we prevent deadlock?
+1. Maintain consistent lock ordering
+
+This is one of the most common solutions.
+
+Always acquire locks in the same order:
+
+synchronized (lock1) {
+    synchronized (lock2) {
+        // critical section
+    }
+}
+
+Both threads should acquire:
+
+lock1 → lock2
+
+Never:
+
+Thread 1: lock1 → lock2
+Thread 2: lock2 → lock1
+
+This prevents the circular dependency that causes the deadlock.
+
+
+2. Use tryLock() with ReentrantLock
+
+Instead of waiting indefinitely, we can attempt to acquire a lock with a timeout.
+
+if (lock1.tryLock(1, TimeUnit.SECONDS)) {
+    try {
+        if (lock2.tryLock(1, TimeUnit.SECONDS)) {
+            try {
+                // critical section
+            } finally {
+                lock2.unlock();
+            }
+        }
+    } finally {
+        lock1.unlock();
+    }
+}
+
+If the second lock cannot be acquired, the thread can release the first lock and retry later.
+
+This prevents a thread from waiting forever.
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+
+
+
