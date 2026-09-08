@@ -3,6 +3,553 @@
 ☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
 
 
+
+Q 1. What is the difference between checked and unchecked exceptions? When would you create your own custom exception?
+
+1. Exception
+An exception is an abnormal event that occurs during program execution and disrupts the normal flow of the application.
+
+2. Exception Handling
+Exception handling is the mechanism used to detect, handle, and recover from runtime problems without abruptly terminating the application.
+
+3. Throwable
+Throwable is the root class for all errors and exceptions in Java. Its two major subclasses are Error and Exception.
+
+4. Error
+An Error represents serious problems generally caused by the JVM or runtime environment that applications usually should not attempt to recover from.
+Examples: OutOfMemoryError, StackOverflowError.
+
+5. Exception
+An Exception represents conditions that an application may reasonably detect and handle.
+Examples: IOException, SQLException, NullPointerException.
+
+6. Checked Exception
+A checked exception is an exception checked by the compiler at compile time. The method must either handle it using try-catch or declare it using throws.
+Examples: IOException, SQLException, ClassNotFoundException.
+
+7. Unchecked Exception
+An unchecked exception is an exception that the compiler does not require the programmer to handle or declare. These are RuntimeException subclasses.
+Examples: NullPointerException, IllegalArgumentException, ArithmeticException, IndexOutOfBoundsException.
+
+8. RuntimeException
+RuntimeException is the superclass of unchecked exceptions. These usually indicate programming errors, invalid arguments, or invalid application state.
+
+9. try
+The try block contains code that may throw an exception.
+
+10. catch
+The catch block handles an exception thrown from the associated try block.
+
+11. finally
+The finally block contains cleanup code that normally executes whether an exception occurs or not.
+It is commonly used for releasing resources, although try-with-resources is preferred for AutoCloseable resources.
+
+12. throw
+The throw keyword is used to explicitly throw an exception.
+Example:
+throw new IllegalArgumentException("Invalid age");
+
+13. throws
+The throws keyword is used in a method declaration to indicate that the method may propagate specified exceptions to its caller.
+Example:
+void readFile() throws IOException
+
+14. Custom Exception
+A custom exception is a user-defined exception created by extending Exception or RuntimeException to represent a domain-specific failure.
+
+15. Checked Custom Exception
+A custom exception extending Exception is checked.
+Example:
+class InsufficientBalanceException extends Exception
+
+16. Unchecked Custom Exception
+A custom exception extending RuntimeException is unchecked.
+Example:
+class InvalidOrderStateException extends RuntimeException
+
+17. Exception Propagation
+Exception propagation is the process by which an unhandled exception moves up the call stack from the current method to its caller until it is handled.
+
+18. Exception Chaining
+Exception chaining is wrapping one exception inside another while preserving the original cause.
+Example:
+throw new OrderProcessingException("Order failed", e);
+
+19. try-with-resources
+try-with-resources automatically closes objects implementing AutoCloseable after the try block finishes.
+It is preferred for resources such as files, streams, and database resources.
+
+20. Best Practice
+Exceptions should represent exceptional conditions, contain meaningful messages, preserve the original cause, and be handled at the appropriate application boundary.
+Do not catch Exception broadly unless there is a specific reason to do so.
+
+👉👉👉👉👉👉👉👉👉👉👉👉👉👉Interview Response
+
+
+
+Checked and unchecked exceptions differ mainly in when they are enforced by the compiler.
+
+Checked exceptions are checked at compile time. The developer must either handle them using try-catch or declare them using throws. They are generally used for recoverable conditions that the caller may reasonably be expected to handle.
+
+Examples include IOException, SQLException, and ClassNotFoundException.
+
+Unchecked exceptions are RuntimeException subclasses. The compiler does not force us to catch or declare them. They commonly represent programming errors, invalid arguments, or invalid application state.
+
+Examples include NullPointerException, IllegalArgumentException, ArithmeticException, and IndexOutOfBoundsException.
+
+For example:
+
+public void readFile() throws IOException {
+    // file operation
+}
+
+Here IOException is checked, so the method must handle it or declare it.
+
+For an unchecked exception:
+
+public void withdraw(double amount) {
+    if (amount <= 0) {
+        throw new IllegalArgumentException("Amount must be positive");
+    }
+}
+
+I would create a custom exception when the application has a domain-specific failure that should be clearly communicated and handled separately.
+
+For example, in a banking application:
+
+class InsufficientBalanceException extends RuntimeException {
+    public InsufficientBalanceException(String message) {
+        super(message);
+    }
+}
+
+Then:
+
+if (amount > balance) {
+    throw new InsufficientBalanceException("Insufficient account balance");
+}
+
+In most business applications, I would generally prefer a custom unchecked exception for business-rule violations because it avoids forcing every caller to catch the exception while still providing a meaningful domain-specific error.
+
+I would use a checked custom exception when the caller is genuinely expected to recover from the condition and the API contract requires explicit handling.
+
+The key distinction is:
+
+Checked Exception
+→ Compiler forces handling or declaration
+→ Often represents recoverable/external conditions
+→ Example: IOException
+
+Unchecked Exception
+→ Compiler does not force handling
+→ Often represents programming errors or invalid state/input
+→ Example: IllegalArgumentException
+
+Custom Exception
+→ Used when standard exceptions do not clearly represent a business/domain-specific failure
+→ Makes errors more meaningful and easier to handle at the appropriate layer.
+
+
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+Q 2. Explain try, catch, finally, throw, and throws. What happens if an exception is thrown inside a finally block?
+
+
+1. try
+The try block contains code that may throw an exception.
+If an exception occurs, Java stops normal execution of the try block and looks for a matching catch block.
+
+2. catch
+The catch block handles an exception thrown from the associated try block.
+A catch block must match the exception type or one of its parent types.
+
+3. finally
+The finally block contains cleanup code that is normally executed after try/catch processing, regardless of whether an exception occurs.
+It is commonly used for cleanup operations such as releasing resources.
+
+4. throw
+The throw keyword is used to explicitly create and throw an exception from a specific point in the code.
+
+Example:
+throw new IllegalArgumentException("Invalid amount");
+
+5. throws
+The throws keyword is used in a method declaration to specify exceptions that the method may propagate to its caller.
+
+Example:
+public void readFile() throws IOException {
+    // file operation
+}
+
+6. Exception Propagation
+Exception propagation occurs when an exception is not handled in the current method and moves up the call stack to the calling method.
+
+7. try-catch-finally
+try contains potentially failing code.
+catch handles the exception.
+finally performs cleanup code that should normally execute regardless of success or failure.
+
+8. Exception in finally
+If an exception is thrown inside a finally block and is not handled there, it can propagate to the caller.
+
+If there was already an exception being propagated from the try/catch block, an exception thrown from finally can replace/suppress the original exception from the caller's perspective.
+
+9. Suppressed Exception
+When using try-with-resources, an exception thrown while closing a resource can become a suppressed exception if another exception is already being propagated.
+The original exception remains the primary exception.
+
+10. try-with-resources
+try-with-resources automatically closes resources that implement AutoCloseable, even when an exception occurs.
+It is generally preferred over manually closing resources in finally.
+
+11. Important finally Rule
+finally normally executes even when:
+- the try block completes normally
+- an exception is thrown
+- the exception is caught
+- the method executes return
+
+However, finally may not execute if the JVM terminates abruptly, for example through System.exit().
+
+
+
+
+👉👉👉👉👉👉👉👉👉👉👉👉👉👉Interview Response
+
+
+
+
+In Java, try, catch, finally, throw, and throws serve different purposes.
+
+The try block contains code that may throw an exception.
+
+The catch block is used to handle an exception thrown from the try block.
+
+The finally block is used for cleanup code and normally executes whether an exception occurs or not.
+
+The throw keyword is used when we want to explicitly throw an exception.
+
+For example:
+
+if (amount <= 0) {
+    throw new IllegalArgumentException("Amount must be positive");
+}
+
+The throws keyword is used in a method declaration to tell the caller that the method may throw a particular exception.
+
+For example:
+
+public void readFile() throws IOException {
+    // file operation
+}
+
+The important difference is:
+
+throw
+→ Actually throws an exception.
+→ Used inside the method body.
+
+throws
+→ Declares that a method may throw exceptions.
+→ Used in the method signature.
+
+For example:
+
+public void process() throws IOException {
+    throw new IOException("Processing failed");
+}
+
+If an exception is thrown inside the finally block, that exception is propagated to the caller if it is not handled inside finally.
+
+One important issue is that if the try block already has an exception and finally throws another exception, the exception from finally can replace the original exception during normal exception propagation. This is one reason we should avoid throwing exceptions from finally.
+
+For resource cleanup, modern Java generally prefers try-with-resources because it automatically closes resources and correctly preserves exceptions as suppressed exceptions.
+
+So, in short:
+
+try     → contains risky code
+catch   → handles exceptions
+finally → cleanup code
+throw   → explicitly throws an exception
+throws  → declares exceptions a method may propagate
+
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+Q 3. You are developing a REST API. How would you design exception handling so that database exceptions, validation errors, resource-not-found errors,
+and unexpected errors return appropriate responses to the client?
+
+
+1. REST API
+A REST API is an HTTP-based interface through which clients interact with application resources using standard HTTP methods such as GET, POST, PUT, PATCH, and DELETE.
+
+2. Exception Handling
+Exception handling is the mechanism used to detect, process, and translate application failures into appropriate responses without exposing internal implementation details to clients.
+
+3. Global Exception Handling
+Global exception handling provides a centralized mechanism for handling exceptions across REST controllers instead of writing try-catch blocks in every controller method.
+
+In Spring Boot, this is commonly implemented using @RestControllerAdvice and @ExceptionHandler.
+
+4. @RestControllerAdvice
+@RestControllerAdvice is used to define global exception handling for REST controllers.
+It combines controller advice with REST response behavior.
+
+5. @ExceptionHandler
+@ExceptionHandler maps a specific exception type to a handler method that generates an appropriate HTTP response.
+
+6. Validation Error
+A validation error occurs when client-provided data does not satisfy the API's input rules.
+
+Examples:
+- Missing required field
+- Invalid email format
+- Negative amount
+- String exceeding maximum length
+
+Common HTTP status:
+400 Bad Request
+
+7. Resource Not Found
+A resource-not-found error occurs when the requested resource does not exist.
+
+Example:
+GET /users/100
+when user 100 does not exist.
+
+Common HTTP status:
+404 Not Found
+
+8. Database Exception
+A database exception occurs when an operation involving the database fails.
+
+Examples:
+- Database connection failure
+- Constraint violation
+- SQL exception
+- Transaction failure
+
+The API should translate database-specific exceptions into appropriate application-level responses instead of exposing SQL/database details.
+
+Common responses depend on the failure:
+- 409 Conflict for certain constraint/business conflicts
+- 503 Service Unavailable for temporary database/infrastructure failures
+- 500 Internal Server Error for unexpected persistence failures
+
+9. Unexpected Exception
+An unexpected exception is an unanticipated application failure that is not explicitly handled by the application.
+
+Common HTTP status:
+500 Internal Server Error
+
+10. HTTP Status Code
+An HTTP status code communicates the result of an HTTP request to the client.
+
+Common API codes:
+200 OK → Successful request
+201 Created → Resource successfully created
+204 No Content → Successful request with no response body
+400 Bad Request → Invalid client request
+401 Unauthorized → Authentication is required or invalid
+403 Forbidden → Client is authenticated but not allowed
+404 Not Found → Resource does not exist
+409 Conflict → Request conflicts with current resource state
+500 Internal Server Error → Unexpected server-side failure
+503 Service Unavailable → Temporary service/infrastructure failure
+
+11. Standard Error Response
+A standard error response is a consistent JSON structure returned for API errors.
+
+A modern API may use fields such as:
+- timestamp
+- status
+- error
+- code
+- message
+- path
+- traceId/correlationId
+
+Example:
+
+{
+    "status": 404,
+    "code": "USER_NOT_FOUND",
+    "message": "User not found",
+    "path": "/users/100"
+}
+
+12. Error Code
+An application-specific error code identifies the type of failure independently of the HTTP status.
+
+Example:
+USER_NOT_FOUND
+INVALID_REQUEST
+DUPLICATE_EMAIL
+
+13. Correlation ID / Trace ID
+A correlation ID or trace ID uniquely identifies a request across application components and services.
+It helps developers trace failures through logs and distributed systems.
+
+14. Exception Translation
+Exception translation converts low-level technical exceptions into meaningful application-level exceptions and HTTP responses.
+
+Example:
+SQLException
+→ DataAccessException
+→ appropriate REST error response
+
+15. Logging
+Logging records relevant diagnostic information about failures for developers and operations teams.
+Internal exception details should be logged securely but should generally not be exposed directly to API clients.
+
+16. Separation of Concerns
+Controllers should primarily handle HTTP concerns.
+Business logic belongs in the service layer.
+Persistence logic belongs in the repository/data-access layer.
+Exception handling should be centralized where practical.
+
+17. Security Principle
+API responses should not expose sensitive implementation details such as SQL queries, database credentials, stack traces, internal class names, or infrastructure details.
+
+18. @Valid
+@Valid triggers Bean Validation on request objects in Spring applications.
+
+Example:
+public ResponseEntity<User> create(@Valid @RequestBody UserRequest request)
+
+19. MethodArgumentNotValidException
+This commonly occurs when @Valid request-body validation fails in Spring MVC.
+A global exception handler can convert it into a structured 400 Bad Request response.
+
+20. ResponseEntity
+ResponseEntity represents the complete HTTP response, including status code, headers, and response body.
+
+21. Custom Application Exception
+A custom application exception represents a domain-specific failure.
+
+Example:
+ResourceNotFoundException
+DuplicateResourceException
+BusinessRuleException
+
+22. Exception Handling Principle
+Handle known exceptions explicitly and return meaningful client-safe responses.
+Handle unexpected exceptions centrally and return a generic response while logging the detailed cause internally.
+
+
+
+👉👉👉👉👉👉👉👉👉👉👉👉👉👉Interview Response
+
+For a REST API, I would use centralized exception handling rather than putting try-catch blocks in every controller.
+
+In Spring Boot, I would typically use @RestControllerAdvice with multiple @ExceptionHandler methods.
+
+I would categorize exceptions based on whether they are caused by the client, the business/domain layer, the database/infrastructure, or an unexpected server failure.
+
+For validation errors, such as an invalid email or missing required field, I would return:
+
+400 Bad Request
+
+with a structured response explaining which fields failed validation.
+
+For a resource-not-found exception, such as requesting a user that does not exist, I would define a custom ResourceNotFoundException and return:
+
+404 Not Found
+
+For database-related exceptions, I would not expose the raw SQLException, SQL query, or database details to the client. I would translate the low-level exception into an appropriate application-level exception.
+
+For example, a duplicate unique-key violation could result in:
+
+409 Conflict
+
+while a temporary database availability problem could result in:
+
+503 Service Unavailable
+
+Other unexpected exceptions would be handled by a final global exception handler and return:
+
+500 Internal Server Error
+
+The client would receive a generic message such as "An unexpected error occurred", while the detailed exception and stack trace would be logged internally.
+
+I would also use a consistent error-response structure, for example:
+
+{
+    "timestamp": "...",
+    "status": 404,
+    "code": "USER_NOT_FOUND",
+    "message": "User not found",
+    "path": "/users/100",
+    "traceId": "..."
+}
+
+The important part is that the client receives a meaningful HTTP status and safe error message, while developers get the detailed technical information through logs.
+
+I would also avoid exposing stack traces, SQL queries, database information, or other internal implementation details in production.
+
+So the overall flow would be:
+
+Client Request
+      ↓
+Controller
+      ↓
+Service
+      ↓
+Repository / Database
+      ↓
+Exception
+      ↓
+@RestControllerAdvice
+      ↓
+@ExceptionHandler
+      ↓
+Standard Error Response
+      ↓
+Client
+
+
+Typical mapping:
+
+Validation Error
+→ 400 Bad Request
+
+Authentication Failure
+→ 401 Unauthorized
+
+Authorization Failure
+→ 403 Forbidden
+
+Resource Not Found
+→ 404 Not Found
+
+Business/Resource Conflict
+→ 409 Conflict
+
+Temporary Infrastructure Failure
+→ 503 Service Unavailable
+
+Unexpected Server Error
+→ 500 Internal Server Error
+
+This gives the API a consistent, maintainable, secure, and client-friendly exception-handling strategy.
+
+
+
+
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+
+
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+
+
+☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
+
+
 ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ Streams and lambdas ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ ♦️♦️♦️♦️♦️♦️ 
 
 ☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
