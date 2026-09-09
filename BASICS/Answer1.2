@@ -5,19 +5,24 @@
 
 
 Q 1. What is the difference between checked and unchecked exceptions? When would you create your own custom exception?
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 1. Exception
 An exception is an abnormal event that occurs during program execution and disrupts the normal flow of the application.
 
 2. Exception Handling
 Exception handling is the mechanism used to detect, handle, and recover from runtime problems without abruptly terminating the application.
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 3. Throwable
 Throwable is the root class for all errors and exceptions in Java. Its two major subclasses are Error and Exception.
 
 4. Error
 An Error represents serious problems generally caused by the JVM or runtime environment that applications usually should not attempt to recover from.
-Examples: OutOfMemoryError, StackOverflowError.
+Common Errors
+
+OutOfMemoryError -	JVM cannot allocate enough memory
+StackOverflowError -	Stack space is exhausted, commonly due to excessive recursion
+NoClassDefFoundError -	JVM cannot find a class definition that was available at compile time
+ExceptionInInitializerError- 	Failure occurs while initializing a class
 
 5. Exception
 An Exception represents conditions that an application may reasonably detect and handle.
@@ -25,14 +30,33 @@ Examples: IOException, SQLException, NullPointerException.
 
 6. Checked Exception
 A checked exception is an exception checked by the compiler at compile time. The method must either handle it using try-catch or declare it using throws.
-Examples: IOException, SQLException, ClassNotFoundException.
+Checked Exceptions:
+
+IOException-	An input/output operation fails, such as reading a file or network data
+FileNotFoundException-	A requested file cannot be found or opened
+SQLException-	A database access or SQL operation fails
+ClassNotFoundException-	JVM cannot find a class when the class is dynamically loaded
+InterruptedException-	A thread is interrupted while it is waiting, sleeping, or blocked
+ParseException-	A value cannot be parsed according to the expected format
 
 7. Unchecked Exception
 An unchecked exception is an exception that the compiler does not require the programmer to handle or declare. These are RuntimeException subclasses.
-Examples: NullPointerException, IllegalArgumentException, ArithmeticException, IndexOutOfBoundsException.
+Unchecked exceptions:
+
+NullPointerException-	Code attempts to use a null reference
+ArithmeticException-	An illegal arithmetic operation occurs, such as integer division by zero
+ArrayIndexOutOfBoundsException-	Code accesses an array using an invalid index
+StringIndexOutOfBoundsException-	Code accesses a String using an invalid index
+ClassCastException-	An object is cast to an incompatible type
+IllegalArgumentException-	A method receives an argument that is invalid or inappropriate
+IllegalStateException-	A method is called when the object is not in a valid state
+NumberFormatException-	A string cannot be converted into the expected numeric type
+ConcurrentModificationException-	A collection is structurally modified while being iterated in an unsupported way
 
 8. RuntimeException
 RuntimeException is the superclass of unchecked exceptions. These usually indicate programming errors, invalid arguments, or invalid application state.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 9. try
 The try block contains code that may throw an exception.
