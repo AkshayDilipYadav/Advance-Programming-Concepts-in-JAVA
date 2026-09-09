@@ -95,6 +95,30 @@ as a key in a HashMap or as an element in a HashSet?
 
 👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉👉 EXCEPTION HANDLING
 
+
+                           Throwable
+                               |
+                 +-------------+-------------+
+                 |                           |
+                Error                     Exception
+                 |                           |
+        +--------+--------+          +-------+------------------+
+        |        |        |          |                          |
+   OutOfMemory  Stack    ...    RuntimeException          Other Exceptions
+   Error       Overflow              |                          |
+              Error                  |                    CHECKED EXCEPTIONS
+                                    |
+                            UNCHECKED EXCEPTIONS
+                                    |
+              +---------------------+----------------------+
+              |            |         |         |           |
+       NullPointer    Arithmetic   ArrayIndex  ClassCast  IllegalArgument
+       Exception     Exception     OutOfBounds Exception  Exception
+                                      Exception
+
+
+
+
 Q5 — Exception Handling
 
 What is the difference between checked and unchecked exceptions? When would you create your own custom exception?
