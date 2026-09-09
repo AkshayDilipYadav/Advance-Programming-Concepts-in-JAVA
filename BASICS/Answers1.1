@@ -243,6 +243,84 @@ For example, a PaymentService interface can expose a pay() method while differen
 
 Q2. What is the difference between inheritance and composition? If you were designing an e-commerce system, when would you prefer composition over inheritance?
 
+1. Inheritance
+Inheritance is an object-oriented mechanism in which a subclass acquires the properties and behavior of a superclass and can extend or override that behavior. In Java, class inheritance is achieved using the extends keyword.
+
+2. Composition
+Composition is an object-oriented design principle in which a class is built by containing references to objects of other classes and delegating responsibilities to those objects. It represents a "has-a" relationship.
+
+3. Inheritance — "is-a" relationship
+Inheritance represents an "is-a" relationship.
+Example: A CardPayment is a PaymentMethod.
+
+4. Composition — "has-a" relationship
+Composition represents a "has-a" relationship.
+Example: An Order has a PaymentMethod.
+
+5. Tight Coupling
+Inheritance generally creates stronger coupling between a subclass and its superclass because the subclass depends on the superclass's implementation and structure.
+
+6. Loose Coupling
+Composition generally promotes loose coupling because a class depends on objects through well-defined interfaces or abstractions rather than inheriting their implementation.
+
+7. Code Reuse
+Inheritance can reuse behavior from a superclass, while composition reuses behavior by delegating work to contained objects.
+
+8. Composition over Inheritance
+"Composition over inheritance" is a design principle that recommends preferring composition when behavior can be modeled using independent, interchangeable components rather than forcing a class hierarchy.
+
+9. IS-A Relationship
+An IS-A relationship represents inheritance or specialization.
+Example:
+CreditCardPayment IS-A PaymentMethod.
+
+10. HAS-A Relationship
+A HAS-A relationship represents composition or aggregation.
+Example:
+Order HAS-A PaymentMethod.
+
+11. Method Overriding
+Method overriding occurs when a subclass provides its own implementation of a method inherited from its superclass.
+
+12. Delegation
+Delegation is a design technique in which an object passes responsibility for an operation to another object that it contains or references.
+
+13. Flexibility
+Composition provides greater flexibility because components can often be replaced or changed independently without modifying the class hierarchy.
+
+14. E-commerce Example
+Inheritance is appropriate when there is a genuine and stable IS-A relationship:
+PaymentMethod
+    |
+    +-- CreditCardPayment
+    +-- UpiPayment
+    +-- CashOnDelivery
+
+Composition is preferable when an object is assembled from multiple independent behaviors:
+Order
+    |
+    +-- PaymentMethod
+    +-- ShippingService
+    +-- DiscountStrategy
+    +-- NotificationService
+
+15. Composition in an E-commerce System
+An Order should generally contain or depend on abstractions such as PaymentMethod, DiscountStrategy, ShippingService, and NotificationService rather than inheriting from them because these behaviors can vary independently and may need to be replaced or extended.
+
+
+
+👉👉👉👉👉👉👉👉👉👉👉👉👉👉Interview Response
+
+
+Inheritance represents an "is-a" relationship where a subclass inherits and extends the behavior of a superclass. Composition represents a "has-a" relationship where a class contains or depends on other objects and delegates responsibilities to them.
+
+Inheritance provides code reuse through a class hierarchy, but it can create tight coupling between the subclass and superclass. Composition generally provides looser coupling, greater flexibility, and better separation of responsibilities.
+
+In an e-commerce system, I would use inheritance when there is a genuine and stable "is-a" relationship, such as CreditCardPayment, UpiPayment, and CashOnDelivery being types of PaymentMethod.
+
+I would prefer composition when the behavior is independent and may change or be combined dynamically. For example, an Order can have a PaymentMethod, DiscountStrategy, ShippingService, and NotificationService. These components can be changed independently without modifying the Order class.
+
+Therefore, I generally prefer composition over inheritance when I need flexibility, loose coupling, and interchangeable behavior, while using inheritance for genuine specialization relationships.
 
 
 ☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
@@ -473,10 +551,6 @@ If access is required, I expose a controlled method such as a getter or, prefera
 
 I would use protected only when there is a deliberate inheritance-based reason for subclasses to access something, 
 default access when package-level visibility is intentionally part of the design, and public when the member is genuinely part of the external API.
-
-
-
-
 
 
 
@@ -761,7 +835,7 @@ It allows multiple threads to operate on the map concurrently while maintaining 
 One important point is that thread-safe individual operations don't automatically make a sequence of operations atomic. For example:
 
 
-
+CAS atomically compares a memory location with an expected value and, if they are equal, replaces the current value with a new value. This enables thread-safe updates without requiring traditional locking.
 
 ☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️
 
@@ -771,6 +845,8 @@ Which would you choose in different situations and why?
 1. Synchronised
 
 synchronized provides mutual exclusion and visibility. Only one thread can execute the synchronized critical section at a time.
+
+Mutual exclusion (mutex) is a concurrency mechanism that ensures that only one thread at a time can execute a critical section that accesses or modifies a shared resource.
 
 class Counter {
     private int count = 0;
