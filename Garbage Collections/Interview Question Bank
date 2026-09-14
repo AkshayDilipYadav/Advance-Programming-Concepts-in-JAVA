@@ -1,0 +1,99 @@
+JVM Process
+│
+├── JVM Memory ( memory areas )
+│   │
+│   ├── Heap
+│   │   │
+│   │   ├── Young Generation
+│   │   │   ├── Eden
+│   │   │   ├── Survivor 0
+│   │   │   └── Survivor 1
+│   │   │
+│   │   └── Old Generation
+│   │
+│   ├── Metaspace
+│   │   └── Class metadata
+│   │
+│   ├── Java Stacks
+│   │   └── One stack per thread
+│   │       ├── Local variables
+│   │       └── Method call frames
+│   │
+│   ├── PC Register
+│   │   └── Current instruction per thread
+│   │
+│   └── Native Method Stack
+│
+└── Garbage Collector
+    │
+    ├── Minor / Young GC
+    │
+    ├── Major / Old GC
+    │
+    └── Full GC
+
+
+
+JVM Process
+│
+├── JVM Runtime Memory ( memory areas)
+│   │
+│   ├── Heap
+│   ├── Metaspace
+│   ├── Java Stacks
+│   ├── PC Registers
+│   └── Native Method Stacks
+│
+└── Garbage Collector
+    └── Automatically reclaims memory from unreachable objects
+
+JVM Process
+A running instance of the Java Virtual Machine that executes Java bytecode and provides the runtime environment for a Java application.
+
+JVM Runtime Memory
+The runtime memory areas defined/used by the JVM to execute Java programs and manage application state.
+
+
+Heap
+The runtime data area from which memory for class instances and arrays is allocated; it is shared among JVM threads and is the primary area managed by garbage collection.
+
+
+Metaspace
+A JVM memory area that stores class metadata and related runtime information for loaded classes; it uses native memory rather than the Java Heap.
+
+
+Java Stack
+Each JVM thread has a private JVM stack that stores stack frames for method invocations.
+
+
+PC Register
+Each JVM thread has a private program counter (PC) register) that indicates the address of the JVM instruction currently being executed by that thread.
+
+Native Method Stack
+A per-thread memory area used to support execution of native methods, typically methods implemented outside Java, such as through JNI.
+
+
+Garbage Collector
+A JVM subsystem that automatically identifies objects that are no longer reachable and reclaims the Heap memory occupied by them.
+
+1. ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q. Can you explain how garbage collection and memory management happen internally?
+
+Q6. Can you explain how garbage collection and memory management happen internally?
+Q7. Can you provide a hierarchy of memory areas, like Heap, Method Area, etc.?
+Q8. When stack memory overflows, how does Java handle the situation?
+
+
+7. Can you explain how Java handles memory management and garbage collection?
+8. Can you tell me when you call `System.gc()` in your Java code?
+
+2. ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3. ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4. ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+5. ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+6. ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+7. ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+8. ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+9. ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
