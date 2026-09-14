@@ -560,6 +560,38 @@ which can enforce validation and business rules. This helps maintain the object'
 
 
 9. ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+can you show how a call each of them in the code a default method and static show in code 
+
+
+interface A{
+    default void show(){
+        //method body
+    }
+
+    static void display(){
+        //method body
+    }
+}
+
+class B implements A{
+    void testDefault(){
+        show();
+    }
+}
+
+public vlass Main{
+    public static void main(String[] args){
+        B test1 = new B();
+        test1.testDefault();
+        A.display();
+    }
+}
+
+
+Default method is an instance method in an interface that provides a concrete implementation inherited by implementing classes,
+while a static method belongs to the interface itself and is called using the interface name.
+
+
 10. ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 11. ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 12. ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
