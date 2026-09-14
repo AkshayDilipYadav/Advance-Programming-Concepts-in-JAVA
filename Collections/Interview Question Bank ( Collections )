@@ -347,3 +347,29 @@ Why asked: Excellent real-world trap.
 Answer: Synchronized wrappers generally serialize access around collection operations, while concurrent collections are specifically designed with finer-grained/non-blocking or specialized concurrency strategies depending on implementation.
 
 Why asked: Backend concurrency knowledge.
+
+
+
+
+
+
+
+
+
+
+1. -----------------------------------------------------------------------------------------------------
+
+
+
+
+
+Q. what happens if a buccket which was previously converted to a tree, and now key value pairs are reduced then beyond which a threshold change happens and what is the change
+
+When a HashMap bucket has been converted from a linked list to a Red-Black Tree because of high collisions, 
+and entries are later removed, Java can convert that tree back into a linked list when the number of nodes in the bucket falls below the
+**UNTREEIFY_THRESHOLD**, which is **6** in the standard implementation. 
+This reduces the memory and processing overhead of maintaining a tree when
+the bucket has relatively few entries. The conversion is handled internally by HashMap; the programmer does not need to perform it manually.
+
+
+
