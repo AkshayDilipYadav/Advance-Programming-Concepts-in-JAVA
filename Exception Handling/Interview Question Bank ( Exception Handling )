@@ -182,6 +182,97 @@ whereas unchecked exceptions are not compiler-enforced and typically indicate pr
 6. ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+Q. Show in code by ceating a custome checked exception of InvalidAgeException and use it in a method ?
+
+Q Similarly code a unchecked exception ?
+
+code in the same example
+
+
+“I can demonstrate both a custom checked exception and a custom unchecked exception using the same age-validation scenario.
+
+```java
+// Custom Checked Exception
+class InvalidAgeException extends Exception {
+
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+
+
+// Custom Unchecked Exception
+class InvalidAgeRuntimeException extends RuntimeException {
+
+    public InvalidAgeRuntimeException(String message) {
+        super(message);
+    }
+}
+
+
+public class Main {
+
+    // Checked exception: must be caught or declared
+    public static void validateAgeChecked(int age)
+            throws InvalidAgeException {
+
+        if (age < 18) {
+            throw new InvalidAgeException(
+                "Age must be 18 or above"
+            );
+        }
+
+        System.out.println("Age is valid");
+    }
+
+
+    // Unchecked exception: no need to catch or declare
+    public static void validateAgeUnchecked(int age) {
+
+        if (age < 18) {
+            throw new InvalidAgeRuntimeException(
+                "Age must be 18 or above"
+            );
+        }
+
+        System.out.println("Age is valid");
+    }
+
+
+    public static void main(String[] args) {
+
+        // Handling checked exception
+        try {
+            validateAgeChecked(16);
+        } catch (InvalidAgeException e) {
+            System.out.println(
+                "Checked: " + e.getMessage()
+            );
+        }
+
+
+        // Handling unchecked exception
+        try {
+            validateAgeUnchecked(16);
+        } catch (InvalidAgeRuntimeException e) {
+            System.out.println(
+                "Unchecked: " + e.getMessage()
+            );
+        }
+    }
+}
+```
+
+Here, `InvalidAgeException` extends `Exception`, so it is a **checked exception**. 
+The `validateAgeChecked()` method must either catch it or declare it using `throws`.
+
+`InvalidAgeRuntimeException` extends `RuntimeException`, so it is an **unchecked exception**. 
+The `validateAgeUnchecked()` method does not need to declare it with `throws`, although we can still catch it if we want to handle the error.
+
+In both cases, `throw` is used to actually create and throw the exception, while `throws` declares a checked exception that a method may pass to its caller.”
+
+
+
 7. ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
