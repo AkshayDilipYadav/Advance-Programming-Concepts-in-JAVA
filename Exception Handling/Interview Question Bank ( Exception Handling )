@@ -1,5 +1,29 @@
 
 
+                            Throwable
+                               |
+                 +-------------+-------------+
+                 |                           |
+                Error                     Exception
+                 |                           |
+        +--------+--------+          +-------+------------------+
+        |        |        |          |                          |
+   OutOfMemory  Stack    ...    RuntimeException          Other Exceptions
+   Error       Overflow              |                          |
+              Error                  |                    CHECKED EXCEPTIONS
+                                    |
+                            UNCHECKED EXCEPTIONS
+                                    |
+              +---------------------+----------------------+
+              |            |         |         |           |
+       NullPointer    Arithmetic   ArrayIndex  ClassCast  IllegalArgument
+       Exception     Exception     OutOfBounds Exception  Exception
+                                      Exception
+
+
+
+
+
 ★★★★★  Checked vs Unchecked
 ★★★★★  Exception Hierarchy
 ★★★★★  try/catch/finally
