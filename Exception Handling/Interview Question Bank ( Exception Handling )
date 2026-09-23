@@ -191,8 +191,8 @@ code in the same example
 
 “I can demonstrate both a custom checked exception and a custom unchecked exception using the same age-validation scenario.
 
-```java
-// Custom Checked Exception
+
+
 class InvalidAgeException extends Exception {
 
     public InvalidAgeException(String message) {
@@ -248,6 +248,10 @@ public class Main {
             System.out.println(
                 "Checked: " + e.getMessage()
             );
+        } finally {
+            System.out.println(
+                "Finally: Checked exception block completed"
+            );
         }
 
 
@@ -258,10 +262,13 @@ public class Main {
             System.out.println(
                 "Unchecked: " + e.getMessage()
             );
+        } finally {
+            System.out.println(
+                "Finally: Unchecked exception block completed"
+            );
         }
     }
 }
-```
 
 Here, `InvalidAgeException` extends `Exception`, so it is a **checked exception**. 
 The `validateAgeChecked()` method must either catch it or declare it using `throws`.
